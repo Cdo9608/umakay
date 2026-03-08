@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>UmaKay — Tu mente importa</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fraunces:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+<style>
+:root{--pu:#6B3FA0;--pul:#8B5FC0;--pud:#4A2575;--puf:#F3EEF9;--go:#D4A017;--gol:#F0C840;--gof:#FDF6E3;--wh:#fff;--ow:#FAF8FF;--gr:#6B7280;--grl:#E5E7EB;--dk:#1A0A2E;--gn:#10B981;--ye:#F59E0B;--re:#EF4444;--rd:#991B1B;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito',sans-serif;background:var(--ow);min-height:100vh;display:flex;flex-direction:column;align-items:center;overflow-x:hidden;}
+.screen{display:none;flex-direction:column;min-height:100vh;width:100%;max-width:480px;animation:fi .35s ease;}
+.screen.active{display:flex;}
+@keyframes fi{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes su{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes pu{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes td{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-6px);opacity:1}}
+@keyframes mi{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
+@keyframes mir{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pop{0%{transform:scale(0)}60%{transform:scale(1.18)}100%{transform:scale(1)}}
+@keyframes confetti{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(80px) rotate(360deg)}}
+@keyframes wv{0%,100%{transform:rotate(0)}25%{transform:rotate(18deg)}75%{transform:rotate(-10deg)}}
+@keyframes blink{0%,100%{transform:scaleY(1)}45%{transform:scaleY(1)}50%{transform:scaleY(.1)}55%{transform:scaleY(1)}}
+@keyframes walk{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-3px) rotate(1deg)}75%{transform:translateY(-3px) rotate(-1deg)}}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+@keyframes star{0%{transform:scale(0) rotate(0)}50%{transform:scale(1.3) rotate(180deg)}100%{transform:scale(1) rotate(360deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+/* ══ PERSONAJES SVG ══ */
+.char-wrap{display:flex;justify-content:center;padding:.5rem 0;}
+.char-bounce{animation:fl 2.5s ease-in-out infinite;}
+.char-blink .eye{animation:blink 3s ease-in-out infinite;}
+.char-wave .arm-r{animation:wv 1s ease-in-out 3;}
+
+/* ══ MASCOTA ══ */
+.mascota-wrap{display:flex;justify-content:center;margin-bottom:.3rem;}
+.mascota-img{width:160px;height:160px;object-fit:contain;filter:drop-shadow(0 8px 24px rgba(107,63,160,.35));border-radius:50%;}
+
+/* ══ SPLASH ══ */
+#s-splash{background:linear-gradient(145deg,var(--pud),var(--pu) 55%,#9B6DD4);align-items:center;justify-content:center;overflow:hidden;position:relative;}
+#s-splash::before{content:'';position:absolute;width:320px;height:320px;background:radial-gradient(circle,rgba(212,160,23,.2),transparent 70%);top:-70px;right:-70px;border-radius:50%;}
+.sp-in{text-align:center;z-index:1;padding:2rem;}
+.sp-logo{width:90px;height:90px;background:rgba(255,255,255,.15);border-radius:26px;margin:0 auto 1.2rem;display:flex;align-items:center;justify-content:center;animation:fl 3s ease-in-out infinite;backdrop-filter:blur(10px);border:2px solid rgba(255,255,255,.22);}
+.sp-name{font-family:'Fraunces',serif;font-size:3.2rem;font-weight:900;color:#fff;letter-spacing:-1px;line-height:1;}
+.sp-tag{font-size:.82rem;color:rgba(255,255,255,.7);font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin:.35rem 0 .25rem;}
+.sp-q{font-size:.8rem;color:var(--gol);font-style:italic;margin-bottom:2.2rem;}
+.sp-btn{background:linear-gradient(135deg,var(--go),var(--gol));color:var(--dk);border:none;padding:.95rem 2.8rem;border-radius:50px;font-size:1rem;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;box-shadow:0 8px 24px rgba(212,160,23,.42);transition:all .3s;}
+.sp-btn:hover{transform:translateY(-2px);}
+
+/* ══ PERFILES ══ */
+#s-profiles{background:var(--ow);}
+.ph{background:linear-gradient(135deg,var(--pud),var(--pu));padding:2.6rem 1.4rem 3.4rem;text-align:center;position:relative;overflow:hidden;}
+.ph::after{content:'';position:absolute;bottom:-16px;left:0;right:0;height:32px;background:var(--ow);border-radius:32px 32px 0 0;}
+.ph h1{font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;margin-bottom:.35rem;}
+.ph p{color:rgba(255,255,255,.7);font-size:.88rem;}
+.pb{padding:1rem 1.3rem 2rem;display:flex;flex-direction:column;gap:.8rem;}
+.pc{background:#fff;border-radius:18px;padding:1.3rem;display:flex;align-items:center;gap:1rem;cursor:pointer;box-shadow:0 4px 14px rgba(107,63,160,.08);border:2px solid transparent;transition:all .28s;animation:su .5s ease both;}
+.pc:nth-child(1){animation-delay:.1s}.pc:nth-child(2){animation-delay:.2s}.pc:nth-child(3){animation-delay:.3s}
+.pc:hover{border-color:var(--pul);transform:translateY(-3px);}
+.pi{width:60px;height:60px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0;}
+.pi-s{background:linear-gradient(135deg,#EDE7F6,#D1C4E9);}
+.pi-t{background:linear-gradient(135deg,#FFF8E1,#FFE082);}
+.pi-p{background:linear-gradient(135deg,#E8F5E9,#C8E6C9);}
+.pci{flex:1;}.pci h3{font-size:1.05rem;font-weight:800;color:var(--dk);margin-bottom:.18rem;}.pci p{font-size:.77rem;color:var(--gr);line-height:1.4;}
+.par{width:32px;height:32px;background:var(--puf);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--pu);font-weight:900;}
+
+/* ══ REGISTRO ══ */
+#s-registro{background:var(--ow);}
+.hdr-purple{background:linear-gradient(135deg,var(--pud),var(--pu));padding:1.1rem 1.3rem;position:sticky;top:0;z-index:10;}
+.hdr-title{font-family:'Fraunces',serif;font-size:1.05rem;color:#fff;font-weight:900;}
+.hdr-sub{font-size:.72rem;color:rgba(255,255,255,.68);}
+.reg-body{padding:1.4rem 1.3rem 2.5rem;display:flex;flex-direction:column;gap:1.3rem;}
+.form-g{display:flex;flex-direction:column;gap:.45rem;}
+.form-lbl{font-size:.8rem;font-weight:800;color:var(--dk);}
+.form-inp{border:2px solid var(--grl);border-radius:13px;padding:.8rem .95rem;font-size:.93rem;font-family:'Nunito',sans-serif;font-weight:700;outline:none;transition:border-color .2s;background:#fff;color:var(--dk);}
+.form-inp:focus{border-color:var(--pu);}
+.form-inp::placeholder{color:#C4BAD4;font-weight:600;}
+.form-hint{font-size:.72rem;color:var(--gr);font-weight:600;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.sel-inp{border:2px solid var(--grl);border-radius:13px;padding:.8rem .95rem;font-size:.9rem;font-family:'Nunito',sans-serif;font-weight:700;outline:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236B3FA0' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right .8rem center;appearance:none;color:var(--dk);cursor:pointer;}
+.sel-inp:focus{border-color:var(--pu);}
+.anon-box{background:var(--puf);border-radius:13px;padding:.9rem 1rem;display:flex;gap:.7rem;align-items:flex-start;}
+.anon-ico{font-size:1.35rem;flex-shrink:0;}
+.anon-txt h4{font-size:.82rem;font-weight:800;color:var(--pu);margin-bottom:.18rem;}
+.anon-txt p{font-size:.75rem;color:var(--gr);line-height:1.5;}
+.btn-pu{background:linear-gradient(135deg,var(--pu),var(--pul));border:none;border-radius:13px;padding:.95rem;font-size:.97rem;font-weight:800;color:#fff;cursor:pointer;font-family:'Nunito',sans-serif;box-shadow:0 4px 14px rgba(107,63,160,.28);transition:all .2s;width:100%;}
+.btn-pu:disabled{opacity:.38;cursor:not-allowed;}
+.btn-pu:not(:disabled):hover{transform:translateY(-2px);}
+
+/* ══ TAMIZAJE ══ */
+#s-tamizaje{background:var(--ow);}
+.tam-hdr{background:linear-gradient(135deg,var(--pud),var(--pu));padding:1.1rem 1.3rem;position:sticky;top:0;z-index:10;}
+.tam-sub{font-size:.72rem;color:rgba(255,255,255,.68);margin-bottom:.42rem;}
+.tam-pb{height:5px;background:rgba(255,255,255,.22);border-radius:10px;overflow:hidden;}
+.tam-pf{height:100%;background:var(--gol);border-radius:10px;transition:width .4s ease;}
+.tam-body{padding:1.3rem;flex:1;}
+.t-blk{font-size:.7rem;font-weight:800;color:var(--pu);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.6rem;}
+.t-q{font-size:1.08rem;font-weight:800;color:var(--dk);line-height:1.42;margin-bottom:1.1rem;}
+.t-crisis-note{background:#FEF2F2;border:1.5px solid #FCA5A5;border-radius:12px;padding:.75rem .9rem;margin-bottom:.8rem;font-size:.78rem;color:var(--rd);font-weight:700;}
+.t-opts{display:flex;flex-direction:column;gap:.58rem;}
+.t-opt{background:#fff;border:2px solid var(--grl);border-radius:14px;padding:.88rem 1rem;display:flex;align-items:center;gap:.78rem;cursor:pointer;transition:all .2s;font-family:'Nunito',sans-serif;width:100%;text-align:left;}
+.t-opt:hover{border-color:var(--pul);background:var(--puf);transform:translateX(3px);}
+.t-opt.sel{border-color:var(--pu);background:var(--puf);}
+.t-opt-e{font-size:1.5rem;flex-shrink:0;}
+.t-opt-t{font-size:.86rem;font-weight:700;color:var(--dk);}
+.tam-nav{display:flex;gap:.7rem;padding:.9rem 1.3rem 1.3rem;}
+.btn-bk{flex:1;background:#fff;border:2px solid var(--grl);border-radius:12px;padding:.78rem;font-size:.88rem;font-weight:800;color:var(--gr);cursor:pointer;font-family:'Nunito',sans-serif;}
+.btn-nx{flex:2;background:linear-gradient(135deg,var(--pu),var(--pul));border:none;border-radius:12px;padding:.78rem;font-size:.88rem;font-weight:800;color:#fff;cursor:pointer;font-family:'Nunito',sans-serif;box-shadow:0 4px 12px rgba(107,63,160,.28);transition:all .2s;}
+.btn-nx:disabled{opacity:.38;cursor:not-allowed;}
+.btn-nx:not(:disabled):hover{transform:translateY(-2px);}
+
+/* ══ RESULTADO ══ */
+#s-resultado{background:var(--ow);align-items:center;padding:1.3rem .9rem;}
+.rc{background:#fff;border-radius:22px;padding:1.8rem 1.4rem;width:100%;max-width:420px;box-shadow:0 8px 28px rgba(107,63,160,.11);text-align:center;animation:su .5s ease;position:relative;overflow:hidden;}
+.confetti-c{position:absolute;top:0;left:0;width:100%;pointer-events:none;}
+.cfl{position:absolute;width:7px;height:7px;border-radius:2px;animation:confetti 1.2s ease-in both;}
+.rc-niv{display:inline-block;padding:.38rem 1.1rem;border-radius:50px;font-size:.75rem;font-weight:800;margin-bottom:.7rem;}
+.nv-ve{background:#D1FAE5;color:#065F46;}.nv-am{background:#FEF3C7;color:#92400E;}.nv-ro{background:#FEE2E2;color:var(--rd);}.nv-ur{background:#FEE2E2;color:var(--rd);}
+.rc-title{font-size:1.3rem;font-weight:900;color:var(--dk);margin-bottom:.45rem;}
+.rc-txt{font-size:.83rem;color:var(--gr);line-height:1.58;margin-bottom:1rem;}
+.rc-tag{background:rgba(107,63,160,.08);border-radius:9px;padding:.42rem .8rem;font-size:.72rem;color:var(--pu);font-weight:700;margin-bottom:.9rem;display:flex;align-items:center;gap:.35rem;width:fit-content;margin-left:auto;margin-right:auto;}
+.rc-ia{background:var(--puf);border-radius:12px;padding:.9rem;margin-bottom:1rem;text-align:left;}
+.rc-ia-lbl{font-size:.67rem;font-weight:800;color:var(--pu);text-transform:uppercase;letter-spacing:1px;margin-bottom:.35rem;}
+.rc-ia-txt{font-size:.82rem;color:var(--dk);line-height:1.54;font-weight:600;}
+.rld-wrap{display:flex;gap:5px;align-items:center;}
+.rld{width:7px;height:7px;background:var(--pul);border-radius:50%;animation:td 1.2s infinite;}
+.rld:nth-child(2){animation-delay:.2s}.rld:nth-child(3){animation-delay:.4s}
+.rc-crisis{background:#FEF2F2;border:2px solid #FCA5A5;border-radius:12px;padding:.9rem;margin-bottom:.9rem;text-align:left;}
+.rc-crisis-t{font-size:.92rem;font-weight:900;color:var(--rd);margin-bottom:.25rem;}
+.rc-crisis-txt{font-size:.78rem;color:var(--rd);line-height:1.5;}
+.rc-linea{font-size:.92rem;font-weight:900;color:var(--pu);margin:.45rem 0 .15rem;}
+
+/* ══ BIENVENIDA ══ */
+#s-bienvenida{background:var(--ow);align-items:center;justify-content:center;padding:1.3rem .9rem;}
+.bv-card{background:#fff;border-radius:22px;padding:1.8rem 1.4rem;width:100%;max-width:420px;box-shadow:0 8px 28px rgba(107,63,160,.11);text-align:center;animation:su .5s ease;}
+.bv-titulo{font-family:'Fraunces',serif;font-size:1.45rem;font-weight:900;color:var(--dk);margin-bottom:.45rem;}
+.bv-sub{font-size:.87rem;color:var(--gr);line-height:1.58;margin-bottom:1.3rem;}
+.bv-steps{display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.3rem;text-align:left;}
+.bv-step{display:flex;align-items:center;gap:.75rem;background:var(--puf);border-radius:13px;padding:.85rem;}
+.bv-step-ico{width:34px;height:34px;background:var(--pu);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+.bv-step-t{font-size:.8rem;font-weight:800;color:var(--dk);line-height:1.3;}
+.bv-step-s{font-size:.7rem;color:var(--gr);margin-top:.08rem;}
+
+/* ══ HOME ══ */
+#s-home{background:var(--ow);}
+.topb{background:linear-gradient(135deg,var(--pud),var(--pu));padding:1rem 1.3rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
+.tbl{display:flex;align-items:center;gap:.55rem;}
+.tb-logo{width:32px;height:32px;border-radius:9px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.tb-logo img{width:100%;height:100%;object-fit:contain;}
+.tb-nm{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:900;color:#fff;}
+.tb-btn{width:32px;height:32px;background:rgba(255,255,255,.14);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.88rem;cursor:pointer;border:none;color:#fff;}
+.hero{background:linear-gradient(135deg,var(--pu),var(--pul));padding:1.3rem;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;bottom:-12px;left:0;right:0;height:24px;background:var(--ow);border-radius:24px 24px 0 0;}
+.hero-hi{color:rgba(255,255,255,.72);font-size:.84rem;font-weight:700;margin-bottom:.1rem;}
+.hero-n{color:#fff;font-size:1.35rem;font-weight:900;margin-bottom:1rem;}
+.ci-wrap{background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border-radius:15px;padding:1rem;border:1px solid rgba(255,255,255,.2);}
+.ci-t{color:#fff;font-size:.84rem;font-weight:700;margin-bottom:.8rem;}
+.ci-row{display:flex;justify-content:space-between;gap:.3rem;}
+.ci-btn{flex:1;background:rgba(255,255,255,.1);border:2px solid transparent;border-radius:11px;padding:.5rem .1rem;cursor:pointer;transition:all .18s;text-align:center;}
+.ci-btn:hover{background:rgba(255,255,255,.22);transform:scale(1.06);}
+.ci-btn.sel{background:rgba(255,255,255,.88);border-color:var(--go);transform:scale(1.1);}
+.ci-e{font-size:1.4rem;display:block;}
+.ci-l{font-size:.52rem;color:rgba(255,255,255,.8);font-weight:700;margin-top:2px;display:block;}
+.ci-btn.sel .ci-l{color:var(--pu);}
+.hb{padding:1rem 1.1rem 5.5rem;display:flex;flex-direction:column;gap:1rem;}
+.sec-t{font-size:.9rem;font-weight:800;color:var(--dk);}
+.mods{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;}
+.mod{background:#fff;border-radius:15px;padding:.9rem .8rem;cursor:pointer;box-shadow:0 3px 11px rgba(107,63,160,.07);border:2px solid transparent;transition:all .22s;text-align:center;}
+.mod:hover{border-color:var(--pul);transform:translateY(-3px);}
+.mod.fl{grid-column:1/-1;display:flex;align-items:center;text-align:left;gap:.8rem;}
+.mod.cm{background:linear-gradient(135deg,var(--pud),var(--pu));}
+.mi{font-size:1.75rem;margin-bottom:.38rem;display:block;}
+.mod.fl .mi{margin-bottom:0;}
+.mo-t{font-size:.75rem;font-weight:800;color:var(--dk);line-height:1.3;}
+.mod.cm .mo-t{color:#fff;}
+.mo-s{font-size:.66rem;color:var(--gr);margin-top:.08rem;}
+.mod.cm .mo-s{color:rgba(255,255,255,.7);}
+.prog-box{background:#fff;border-radius:15px;padding:.95rem;box-shadow:0 3px 11px rgba(107,63,160,.07);}
+.prow{display:flex;justify-content:space-between;align-items:center;margin-bottom:.48rem;}
+.plbl{font-size:.74rem;color:var(--gr);font-weight:600;}
+.pval{font-size:.74rem;color:var(--pu);font-weight:800;}
+.pbar{height:6px;background:var(--grl);border-radius:10px;overflow:hidden;margin-bottom:.28rem;}
+.pfil{height:100%;background:linear-gradient(90deg,var(--pu),var(--pul));border-radius:10px;}
+.tip-box{background:linear-gradient(135deg,var(--gof),#FEF9EC);border:1.5px solid rgba(212,160,23,.25);border-radius:15px;padding:.95rem;display:flex;gap:.65rem;}
+.tip-i{font-size:1.25rem;flex-shrink:0;}
+.tip-t{font-size:.82rem;font-weight:800;color:#5C4000;margin-bottom:.18rem;}
+.tip-tx{font-size:.74rem;color:#7A5C00;line-height:1.5;font-weight:600;}
+/* Retos mini */
+.retos-row{display:flex;gap:.6rem;overflow-x:auto;padding-bottom:.2rem;scrollbar-width:none;}
+.retos-row::-webkit-scrollbar{display:none;}
+.reto-chip{background:#fff;border:2px solid var(--grl);border-radius:12px;padding:.7rem .85rem;flex-shrink:0;cursor:pointer;transition:all .2s;text-align:center;min-width:88px;}
+.reto-chip:hover{border-color:var(--pu);transform:translateY(-2px);}
+.reto-chip.done{background:var(--puf);border-color:var(--pu);}
+.reto-e{font-size:1.3rem;display:block;margin-bottom:.25rem;}
+.reto-t{font-size:.65rem;font-weight:800;color:var(--dk);line-height:1.2;}
+.reto-chip.done .reto-t{color:var(--pu);}
+/* Navbar */
+.bnav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--grl);display:flex;padding:.5rem 0 .65rem;max-width:480px;margin:0 auto;box-shadow:0 -4px 16px rgba(107,63,160,.07);}
+.bni{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:.2rem 0;}
+.bni .ni{font-size:1.18rem;}
+.bni .nl{font-size:.58rem;font-weight:700;color:var(--gr);}
+.bni.act .nl{color:var(--pu);}
+.bnd{width:4px;height:4px;background:var(--pu);border-radius:50%;margin-top:1px;}
+
+/* ══ CHAT ══ */
+#s-chat{background:#F7F3FF;flex-direction:column;}
+.chdr{background:linear-gradient(135deg,var(--pud),var(--pu));padding:.95rem 1.1rem;display:flex;align-items:center;gap:.68rem;position:sticky;top:0;z-index:10;}
+.cbk{width:32px;height:32px;background:rgba(255,255,255,.14);border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.95rem;color:#fff;border:none;flex-shrink:0;}
+.cav{width:38px;height:38px;background:linear-gradient(135deg,var(--go),var(--gol));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0;}
+.cbi{flex:1;}
+.cbn{color:#fff;font-weight:800;font-size:.92rem;}
+.cbs{color:rgba(255,255,255,.65);font-size:.68rem;display:flex;align-items:center;gap:3px;}
+.sdot{width:5px;height:5px;background:#4ADE80;border-radius:50%;animation:pu 2s infinite;}
+.cmsgs{flex:1;overflow-y:auto;padding:1rem 1rem 200px;display:flex;flex-direction:column;gap:.68rem;}
+.msg{max-width:82%;}
+.msg.bot{align-self:flex-start;animation:mi .28s ease both;}
+.msg.user{align-self:flex-end;animation:mir .28s ease both;}
+.mb{padding:.8rem .92rem;border-radius:16px;font-size:.85rem;line-height:1.54;font-weight:600;}
+.msg.bot .mb{background:#fff;color:var(--dk);border-bottom-left-radius:4px;box-shadow:0 3px 9px rgba(107,63,160,.07);}
+.msg.user .mb{background:linear-gradient(135deg,var(--pu),var(--pul));color:#fff;border-bottom-right-radius:4px;}
+.mt{font-size:.58rem;color:var(--gr);margin-top:2px;padding:0 2px;}
+.msg.user .mt{text-align:right;}
+.opts{display:flex;flex-direction:column;gap:.4rem;margin-top:.2rem;}
+.obt{background:#fff;border:2px solid var(--grl);border-radius:11px;padding:.65rem .85rem;font-size:.81rem;font-weight:700;color:var(--pu);cursor:pointer;transition:all .18s;font-family:'Nunito',sans-serif;text-align:left;display:flex;align-items:center;gap:.4rem;}
+.obt:hover{border-color:var(--pu);background:var(--puf);transform:translateX(3px);}
+.obt:disabled{opacity:.42;cursor:not-allowed;transform:none;}
+.typi{display:flex;gap:5px;align-items:center;padding:.8rem .92rem;background:#fff;border-radius:16px;border-bottom-left-radius:4px;width:fit-content;}
+.tdd{width:7px;height:7px;background:var(--pul);border-radius:50%;animation:td 1.2s infinite;}
+.tdd:nth-child(2){animation-delay:.2s}.tdd:nth-child(3){animation-delay:.4s}
+.iabox{position:fixed;bottom:0;left:0;right:0;background:#fff;padding:.65rem .9rem;border-top:1px solid var(--grl);max-width:480px;margin:0 auto;}
+.anon-badge{background:var(--puf);border-radius:8px;padding:.28rem .65rem;font-size:.65rem;color:var(--pu);font-weight:700;margin-bottom:.45rem;display:flex;align-items:center;gap:.3rem;width:fit-content;}
+.inpr{display:flex;gap:.48rem;align-items:flex-end;}
+.cinp{flex:1;border:2px solid var(--grl);border-radius:12px;padding:.62rem .82rem;font-size:.85rem;font-family:'Nunito',sans-serif;font-weight:600;outline:none;transition:border-color .2s;resize:none;max-height:72px;background:var(--ow);}
+.cinp:focus{border-color:var(--pu);background:#fff;}
+.csnd{width:39px;height:39px;background:linear-gradient(135deg,var(--pu),var(--pul));border:none;border-radius:12px;color:#fff;font-size:.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .18s;flex-shrink:0;}
+.csnd:hover{transform:scale(1.06);}
+.csnd:disabled{opacity:.48;cursor:not-allowed;transform:none;}
+
+/* ══ APRENDE ══ */
+#s-aprende{background:var(--ow);}
+.apr-body{padding:1.2rem 1.1rem 5.5rem;display:flex;flex-direction:column;gap:1.2rem;}
+.apr-cats{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.2rem;scrollbar-width:none;}
+.apr-cats::-webkit-scrollbar{display:none;}
+.cat-pill{background:#fff;border:2px solid var(--grl);border-radius:50px;padding:.42rem .9rem;font-size:.75rem;font-weight:800;color:var(--gr);cursor:pointer;white-space:nowrap;transition:all .18s;flex-shrink:0;}
+.cat-pill.act{background:var(--pu);border-color:var(--pu);color:#fff;}
+.vid-card{background:#fff;border-radius:17px;overflow:hidden;box-shadow:0 3px 12px rgba(107,63,160,.09);border:2px solid transparent;transition:all .22s;}
+.vid-card:hover{border-color:var(--pul);transform:translateY(-2px);}
+.vid-thumb{position:relative;width:100%;padding-top:56.25%;background:var(--dk);overflow:hidden;}
+.vid-thumb iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+.vid-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;cursor:pointer;}
+.vid-ph-char{font-size:2.8rem;animation:fl 2s ease-in-out infinite;}
+.vid-ph-lbl{color:rgba(255,255,255,.8);font-size:.75rem;font-weight:700;text-align:center;padding:0 1rem;}
+.vid-ph-play{width:46px;height:46px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.vid-info{padding:.9rem;}
+.vid-cat{font-size:.65rem;font-weight:800;color:var(--pu);text-transform:uppercase;letter-spacing:1px;margin-bottom:.25rem;}
+.vid-title{font-size:.92rem;font-weight:800;color:var(--dk);margin-bottom:.25rem;line-height:1.32;}
+.vid-desc{font-size:.75rem;color:var(--gr);line-height:1.42;margin-bottom:.55rem;}
+.vid-meta{display:flex;align-items:center;gap:.55rem;}
+.vid-dur{font-size:.68rem;color:var(--gr);font-weight:700;}
+.vid-badge{background:var(--puf);color:var(--pu);border-radius:7px;padding:.18rem .48rem;font-size:.65rem;font-weight:800;}
+.streak-box{background:linear-gradient(135deg,var(--gof),#FEF9EC);border:1.5px solid rgba(212,160,23,.25);border-radius:15px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:.85rem;}
+.streak-ico{font-size:1.9rem;}
+.streak-t h4{font-size:.88rem;font-weight:800;color:#5C4000;}
+.streak-t p{font-size:.73rem;color:#7A5C00;font-weight:600;margin-top:.08rem;}
+.streak-n{font-size:1.75rem;font-weight:900;color:var(--go);margin-left:auto;}
+/* Personajes emociones — grid */
+.emo-chars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;}
+.echar-big{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.3rem;transition:transform .18s;padding:0;}
+.echar-big:active{transform:scale(.9);}
+.echar-big-face{width:100%;aspect-ratio:1;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;border:3px solid transparent;transition:all .2s;box-shadow:0 4px 12px rgba(0,0,0,.12);}
+.echar-big.act .echar-big-face{border:3px solid #1A0A2E;transform:scale(1.07);box-shadow:0 7px 20px rgba(0,0,0,.22);}
+.echar-big-name{font-size:.7rem;font-weight:800;color:var(--gr);}
+.echar-big.act .echar-big-name{color:var(--pu);}
+.apr-cat-banner{background:linear-gradient(135deg,var(--puf),#EDE7F6);border-radius:14px;padding:.8rem .95rem;display:flex;align-items:center;gap:.75rem;border:1.5px solid rgba(107,63,160,.15);}
+/* vid-visto badge */
+.vid-visto{background:#D1FAE5;color:#065F46;border-radius:7px;padding:.18rem .48rem;font-size:.65rem;font-weight:800;}
+.vid-nuevo{background:linear-gradient(135deg,#EF4444,#F87171);color:#fff;border-radius:7px;padding:.18rem .48rem;font-size:.62rem;font-weight:900;}
+
+/* ══ SEMÁFORO / ALERTAS / DOCENTE / PADRES ══ */
+.semaf-card{background:#fff;border-radius:16px;padding:.9rem .6rem;display:flex;flex-direction:column;align-items:center;gap:.35rem;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.07);}
+.alerta-card{background:#fff;border-radius:16px;padding:.9rem 1rem;display:flex;align-items:flex-start;gap:.75rem;box-shadow:0 3px 10px rgba(0,0,0,.07);}
+.alerta-naranja{border-left:4px solid #F59E0B;}
+.alerta-roja{border-left:4px solid #EF4444;}
+.alerta-ico{font-size:1.4rem;flex-shrink:0;margin-top:.1rem;}
+.doc-action-btn{background:#fff;border:2px solid var(--grl);border-radius:16px;padding:1rem .8rem;display:flex;flex-direction:column;align-items:center;gap:.5rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.doc-action-btn:hover{border-color:var(--pul);transform:translateY(-2px);}
+/* Capacitaciones */
+.cap-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.09);display:flex;flex-direction:column;cursor:pointer;transition:transform .2s;}
+.cap-card:hover{transform:translateY(-3px);}
+.cap-thumb{height:110px;display:flex;align-items:center;justify-content:center;position:relative;}
+.cap-play{width:42px;height:42px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#1A0A2E;font-weight:900;}
+.cap-info{padding:.85rem .95rem;}
+.cap-fuente{font-size:.62rem;font-weight:900;color:var(--pu);text-transform:uppercase;letter-spacing:1px;margin-bottom:.22rem;}
+.cap-title{font-size:.88rem;font-weight:900;color:var(--dk);margin-bottom:.28rem;line-height:1.3;}
+.cap-desc{font-size:.72rem;color:var(--gr);line-height:1.45;}
+.cap-tag{background:var(--grl);color:var(--gr);border-radius:6px;padding:.18rem .45rem;font-size:.62rem;font-weight:800;}
+.cap-tag-gr{background:#D1FAE5;color:#065F46;}
+.cur-card{background:#fff;border-radius:16px;padding:.85rem 1rem;display:flex;align-items:center;gap:.8rem;box-shadow:0 2px 10px rgba(0,0,0,.07);cursor:pointer;transition:transform .18s;}
+.cur-card:hover{transform:translateX(3px);}
+.cur-ico{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+/* Protocolo */
+.proto-card{background:#fff;border-radius:16px;padding:1rem 1.1rem;box-shadow:0 2px 10px rgba(0,0,0,.07);display:flex;flex-direction:column;gap:.55rem;}
+.proto-header{font-size:.82rem;font-weight:900;margin-bottom:.1rem;}
+.proto-step{display:flex;align-items:flex-start;gap:.6rem;font-size:.78rem;color:var(--dk);line-height:1.45;}
+.proto-num{width:22px;height:22px;border-radius:50%;color:#fff;font-size:.68rem;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.05rem;}
+/* Padres */
+.pad-action{background:#fff;border:2px solid var(--grl);border-radius:18px;padding:.95rem 1rem;display:flex;align-items:center;gap:.85rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 10px rgba(0,0,0,.06);width:100%;}
+.pad-action:hover{border-color:var(--pul);transform:translateX(3px);}
+.pad-action-ico{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+.senal-item{display:flex;align-items:flex-start;gap:.65rem;font-size:.78rem;color:var(--dk);line-height:1.45;padding:.3rem 0;border-bottom:1px solid var(--grl);}
+.senal-item:last-child{border-bottom:none;}
+.senal-ico{font-size:1.1rem;flex-shrink:0;}
+/* Consejos */
+.consejo-card{background:#fff;border-radius:18px;padding:1rem 1.1rem;box-shadow:0 3px 12px rgba(0,0,0,.08);display:flex;flex-direction:column;gap:.6rem;}
+.consejo-si{border-top:4px solid #10B981;}
+.consejo-no{border-top:4px solid #EF4444;}
+.consejo-header{font-size:.75rem;font-weight:900;letter-spacing:.8px;color:var(--dk);}
+.consejo-item{display:flex;gap:.6rem;font-size:.78rem;color:var(--dk);line-height:1.5;}
+
+/* ══ MISIONES ══ */
+#s-misiones{background:var(--ow);}
+.mis-body{padding:1.2rem 1.1rem 5.5rem;display:flex;flex-direction:column;gap:1.15rem;}
+/* XP Bar */
+.xp-bar-wrap{background:#fff;border-radius:18px;padding:1.1rem 1.2rem;box-shadow:0 3px 12px rgba(107,63,160,.1);}
+.xp-bar-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;}
+.xp-nivel-badge{background:linear-gradient(135deg,var(--pu),var(--pul));color:#fff;border-radius:20px;padding:.3rem .8rem;font-size:.75rem;font-weight:900;transition:all .4s;}
+.xp-meta{font-size:.72rem;color:var(--gr);font-weight:700;}
+.xp-track{background:var(--grl);border-radius:50px;height:14px;overflow:hidden;margin-bottom:.5rem;position:relative;}
+.xp-fill{background:linear-gradient(90deg,var(--pu),var(--gol));height:100%;border-radius:50px;transition:width .8s cubic-bezier(.34,1.56,.64,1);}
+.xp-niveles{display:flex;justify-content:space-between;font-size:.6rem;color:var(--gr);font-weight:700;}
+/* Secciones */
+.mis-seccion{font-size:.68rem;font-weight:900;color:var(--gr);letter-spacing:1.5px;padding:.1rem 0;}
+/* Tarjetas de misión — ANIMADAS */
+.mis-card{background:#fff;border-radius:18px;padding:1rem 1.1rem;box-shadow:0 3px 12px rgba(107,63,160,.08);border:2.5px solid transparent;transition:all .3s;cursor:pointer;display:flex;align-items:center;gap:.9rem;position:relative;overflow:hidden;}
+.mis-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(107,63,160,.04),transparent);opacity:0;transition:opacity .3s;}
+.mis-card:hover{border-color:var(--pul);transform:translateY(-3px);box-shadow:0 8px 24px rgba(107,63,160,.16);}
+.mis-card:hover::before{opacity:1;}
+.mis-card:active{transform:scale(.97);}
+.mis-card.done{background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border-color:#10B981;animation:none;}
+.mis-card.done:hover{transform:none;border-color:#10B981;}
+.mis-ico-wrap{width:54px;height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;flex-shrink:0;transition:transform .4s cubic-bezier(.34,1.56,.64,1);}
+.mis-card:hover .mis-ico-wrap{transform:scale(1.12) rotate(-5deg);}
+.mis-card.done .mis-ico-wrap{transform:scale(1.1);}
+.mis-info{flex:1;}
+.mis-title{font-size:.9rem;font-weight:900;color:var(--dk);margin-bottom:.18rem;}
+.mis-card.done .mis-title{color:#065F46;}
+.mis-desc{font-size:.73rem;color:var(--gr);line-height:1.38;margin-bottom:.38rem;}
+.mis-reward{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;}
+.mis-xp{background:linear-gradient(135deg,#FDE68A,#FCD34D);color:#78350F;border-radius:8px;padding:.2rem .5rem;font-size:.68rem;font-weight:900;}
+.mis-tipo{background:var(--puf);color:var(--pu);border-radius:8px;padding:.2rem .5rem;font-size:.65rem;font-weight:800;}
+.mis-check{width:28px;height:28px;border-radius:50%;background:var(--grl);border:none;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;transition:all .4s cubic-bezier(.34,1.56,.64,1);}
+.mis-card.done .mis-check{background:#10B981;transform:scale(1.15);}
+/* Mini preview en home */
+.mis-preview-card{background:#fff;border-radius:14px;padding:.8rem 1rem;display:flex;align-items:center;gap:.85rem;box-shadow:0 2px 10px rgba(107,63,160,.08);border:2px solid transparent;margin-bottom:.55rem;transition:all .25s;cursor:pointer;}
+.mis-preview-card:hover{border-color:var(--pul);transform:translateX(3px);}
+.mis-preview-card.done{background:#F0FDF4;border-color:#10B981;}
+.mis-prev-ico{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+.mis-prev-info{flex:1;}
+.mis-prev-t{font-size:.85rem;font-weight:800;color:var(--dk);}
+.mis-preview-card.done .mis-prev-t{color:#065F46;}
+.mis-prev-xp{font-size:.68rem;font-weight:800;color:var(--go);}
+.mis-prev-check{font-size:1.2rem;}
+/* Logros */
+.logros-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem;}
+.logro{display:flex;flex-direction:column;align-items:center;gap:.3rem;background:#fff;border-radius:14px;padding:.7rem .4rem;box-shadow:0 2px 8px rgba(107,63,160,.08);transition:transform .2s;cursor:pointer;}
+.logro.locked{filter:grayscale(1);opacity:.38;}
+.logro:not(.locked){animation:pop .5s cubic-bezier(.34,1.56,.64,1);}
+.logro:not(.locked):hover{transform:scale(1.08);}
+.logro-ico{font-size:1.8rem;}
+.logro-nm{font-size:.58rem;font-weight:800;color:var(--dk);text-align:center;line-height:1.2;}
+/* XP POP toast */
+.xp-pop{position:fixed;top:20%;left:50%;transform:translateX(-50%) scale(0);background:linear-gradient(135deg,var(--pu),var(--gol));color:#fff;border-radius:50px;padding:.55rem 1.3rem;font-size:.9rem;font-weight:900;z-index:9999;pointer-events:none;animation:xppop .9s cubic-bezier(.34,1.56,.64,1) forwards;}
+@keyframes xppop{0%{transform:translateX(-50%) scale(0);opacity:0}30%{transform:translateX(-50%) scale(1.1);opacity:1}70%{transform:translateX(-50%) scale(1);opacity:1}100%{transform:translateX(-50%) scale(.9) translateY(-30px);opacity:0}}
+/* Confetti */
+.confetti-piece{position:fixed;width:8px;height:8px;border-radius:2px;pointer-events:none;z-index:9998;animation:confetti 1.2s ease-out forwards;}
+@keyframes confetti{0%{opacity:1;transform:translateY(0) rotate(0) scale(1)}100%{opacity:0;transform:translateY(120px) rotate(720deg) scale(.5)}}
+/* Celebración tarjeta */
+@keyframes celebrar{0%{transform:scale(0) rotate(-10deg)}60%{transform:scale(1.25) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+.mis-card.celebrando .mis-ico-wrap{animation:celebrar .55s cubic-bezier(.34,1.56,.64,1);}
+/* Nivel UP banner */
+.nivel-up-banner{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);background:linear-gradient(135deg,#1A0A2E,#4A2575);border-radius:24px;padding:1.8rem 2rem;text-align:center;z-index:9999;box-shadow:0 20px 60px rgba(0,0,0,.4);animation:nivelup .5s cubic-bezier(.34,1.56,.64,1) forwards;}
+@keyframes nivelup{0%{transform:translate(-50%,-50%) scale(0)}70%{transform:translate(-50%,-50%) scale(1.05)}100%{transform:translate(-50%,-50%) scale(1)}}
+.nivel-up-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9998;}
+
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.mis-card:not(.done){position:relative;overflow:hidden;}
+.mis-card:not(.done)::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);background-size:200% 100%;animation:shimmer 3s ease-in-out infinite;pointer-events:none;border-radius:16px;}
+.mis-card.done{animation:missionComplete .5s cubic-bezier(.34,1.56,.64,1) forwards;}
+@keyframes missionComplete{0%{transform:scale(1)}30%{transform:scale(1.04)}60%{transform:scale(.98)}100%{transform:scale(1)}}
+/* Category filter buttons */
+.doc-cat-btn,.pad-cat-btn{background:#fff;border:2px solid var(--grl);border-radius:20px;padding:.38rem .85rem;font-size:.72rem;font-weight:800;color:var(--gr);white-space:nowrap;cursor:pointer;transition:all .2s;flex-shrink:0;}
+.doc-cat-btn.active,.pad-cat-btn.active{background:var(--pu);border-color:var(--pu);color:#fff;}
+.doc-cat-btn:hover,.pad-cat-btn.active:hover{opacity:.9;}
+#s-cita{background:var(--ow);}
+.cita-body{padding:1.3rem 1.2rem 3rem;display:flex;flex-direction:column;gap:1.2rem;}
+.posta-card{background:#fff;border-radius:17px;padding:1.1rem;box-shadow:0 3px 11px rgba(107,63,160,.08);border:2px solid transparent;cursor:pointer;transition:all .22s;}
+.posta-card:hover,.posta-card.sel{border-color:var(--pu);}
+.posta-top{display:flex;align-items:center;gap:.75rem;margin-bottom:.55rem;}
+.posta-ico{width:42px;height:42px;background:linear-gradient(135deg,#EDE7F6,#D1C4E9);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;}
+.posta-nm{font-size:.92rem;font-weight:800;color:var(--dk);}
+.posta-dt{font-size:.72rem;color:var(--gr);font-weight:600;}
+.posta-tags{display:flex;gap:.5rem;flex-wrap:wrap;}
+.ptag{background:var(--puf);color:var(--pu);border-radius:7px;padding:.22rem .52rem;font-size:.67rem;font-weight:800;}
+.ptag.gn{background:#D1FAE5;color:#065F46;}
+.hora-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;}
+.hora-btn{background:#fff;border:2px solid var(--grl);border-radius:11px;padding:.75rem;text-align:center;cursor:pointer;transition:all .18s;font-family:'Nunito',sans-serif;}
+.hora-btn:hover,.hora-btn.sel{border-color:var(--pu);background:var(--puf);}
+.hora-dia{font-size:.82rem;font-weight:800;color:var(--dk);}
+.hora-hrs{font-size:.68rem;color:var(--gr);font-weight:600;margin-top:.18rem;}
+.turno-row{display:flex;gap:.55rem;}
+.turno-btn{flex:1;background:#fff;border:2px solid var(--grl);border-radius:11px;padding:.7rem;text-align:center;cursor:pointer;transition:all .18s;font-family:'Nunito',sans-serif;}
+.turno-btn:hover,.turno-btn.sel{border-color:var(--pu);background:var(--puf);}
+.turno-e{font-size:1.35rem;display:block;margin-bottom:.22rem;}
+.turno-t{font-size:.78rem;font-weight:800;color:var(--dk);}
+
+/* ══ CONFIRM CITA ══ */
+#s-confirmcita{background:var(--ow);align-items:center;justify-content:center;padding:1.3rem .9rem;}
+.conf-card{background:#fff;border-radius:22px;padding:1.8rem 1.4rem;width:100%;max-width:420px;box-shadow:0 8px 28px rgba(107,63,160,.11);text-align:center;}
+.qr-box{width:120px;height:120px;margin:0 auto 1.1rem;background:var(--dk);border-radius:14px;display:flex;align-items:center;justify-content:center;padding:.7rem;}
+.qr-inner{width:100%;height:100%;background:#fff;border-radius:6px;display:grid;grid-template-columns:repeat(7,1fr);gap:2px;padding:3px;}
+.qr-cell{border-radius:1px;}
+.conf-row{display:flex;justify-content:space-between;align-items:center;padding:.28rem 0;border-bottom:1px solid rgba(107,63,160,.1);}
+.conf-row:last-child{border-bottom:none;}
+.conf-key{font-size:.75rem;color:var(--gr);font-weight:600;}
+.conf-val{font-size:.77rem;font-weight:800;color:var(--dk);}
+.conf-anon{background:#D1FAE5;border-radius:9px;padding:.5rem .75rem;font-size:.72rem;color:#065F46;font-weight:700;margin-bottom:.9rem;display:flex;align-items:center;gap:.35rem;}
+
+/* ══ BREATHING ══ */
+#bov{display:none;position:fixed;inset:0;background:rgba(74,37,117,.96);z-index:1000;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;}
+.blbl{font-size:.8rem;color:rgba(255,255,255,.6);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.8rem;}
+.bcirc{width:148px;height:148px;border-radius:50%;background:linear-gradient(135deg,var(--pul),var(--go));display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:800;color:#fff;margin:0 auto 1.6rem;transition:transform 4s ease;box-shadow:0 0 50px rgba(212,160,23,.3);}
+.bact{font-size:1.18rem;font-weight:800;color:#fff;margin-bottom:.35rem;}
+.bnum{font-size:2.7rem;font-weight:900;color:var(--gol);margin-bottom:1.8rem;}
+.bcls{background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.25);color:#fff;padding:.68rem 1.8rem;border-radius:50px;font-size:.85rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;}
+
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--pul);border-radius:10px;}
+@media(max-width:480px){body{background:var(--pud);}}
+</style>
+</head>
+<body>
+
+<!-- ════════════ SPLASH ════════════ -->
+<div id="s-splash" class="screen active">
+<div class="sp-in">
+
+<!-- MASCOTA UmaKay — imagen real -->
+<div class="mascota-wrap">
+  <img src="imagenes/animacion1.jpeg" alt="Mascota UmaKay" class="mascota-img char-bounce"/>
+</div>
+
+<div class="sp-name">UmaKay</div>
+<div class="sp-tag">Tu mente importa</div>
+<div class="sp-q">Uma = cabeza · Kay = estar bien · Quechua</div>
+<button class="sp-btn" onclick="go('s-profiles')">Empezar ✨</button>
+</div>
+</div>
+
+<!-- ════════════ PERFILES ════════════ -->
+<div id="s-profiles" class="screen">
+<div class="ph" style="padding-bottom:1.8rem">
+  <img src="imagenes/animacion1.jpeg" alt="UmaKay" style="width:90px;height:90px;object-fit:contain;border-radius:50%;margin:0 auto .6rem;display:block;filter:drop-shadow(0 4px 12px rgba(107,63,160,.3))"/>
+  <h1>¡Hola! Soy UmaKay 👋</h1>
+  <p>¿Quién eres hoy?</p>
+</div>
+<div class="pb">
+  <div class="pc" onclick="startStudent()">
+    <div class="pi pi-s">🎒</div>
+    <div class="pci"><h3>Soy estudiante</h3><p>Tu espacio seguro para cuidar tu bienestar</p></div>
+    <div class="par">›</div>
+  </div>
+  <div class="pc" onclick="startDocente()">
+    <div class="pi pi-t">📚</div>
+    <div class="pci"><h3>Soy docente</h3><p>Panel de bienestar del aula y alertas</p></div>
+    <div class="par">›</div>
+  </div>
+  <div class="pc" onclick="startPadre()">
+    <div class="pi pi-p">🏠</div>
+    <div class="pci"><h3>Soy padre o madre</h3><p>Acompaña a tu hijo con orientación</p></div>
+    <div class="par">›</div>
+  </div>
+  <div style="text-align:center;font-size:.75rem;color:var(--gr);padding:.3rem;font-weight:600">🔒 Todos los datos son anónimos y seguros</div>
+</div>
+</div>
+
+<!-- ════════════ LOGIN DOCENTE ════════════ -->
+<div id="s-login-docente" class="screen">
+<div class="hdr-purple" style="text-align:center;padding:2rem 1.2rem 2.5rem">
+  <img src="imagenes/animacion1.jpeg" alt="UmaKay" style="width:80px;height:80px;object-fit:contain;border-radius:50%;margin:0 auto .7rem;display:block;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))"/>
+  <div class="hdr-title">Acceso Docente 📚</div>
+  <div class="hdr-sub">Ingresa tu código de docente</div>
+</div>
+<div style="padding:1.5rem 1.3rem;display:flex;flex-direction:column;gap:1.2rem;max-width:400px;margin:0 auto;width:100%">
+  <div class="form-g">
+    <label class="form-lbl">Código de docente</label>
+    <input class="form-inp" id="doc-login-codigo" type="text" placeholder="Ej: DOC-2025-0042" oninput="checkDocLogin()">
+    <span class="form-hint">📋 Asignado por la dirección del colegio</span>
+  </div>
+  <div class="form-g">
+    <label class="form-lbl">Tu nombre (opcional)</label>
+    <input class="form-inp" id="doc-login-nombre" type="text" placeholder="Prof. García">
+  </div>
+  <div class="form-g">
+    <label class="form-lbl">Grado y sección a cargo</label>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.7rem">
+      <select class="sel-inp" id="doc-login-grado" onchange="checkDocLogin()">
+        <option value="">Grado</option>
+        <optgroup label="Primaria">
+          <option value="1P">1° Primaria</option><option value="2P">2° Primaria</option>
+          <option value="3P">3° Primaria</option><option value="4P">4° Primaria</option>
+          <option value="5P">5° Primaria</option><option value="6P">6° Primaria</option>
+        </optgroup>
+        <optgroup label="Secundaria">
+          <option value="1S">1° Secundaria</option><option value="2S">2° Secundaria</option>
+          <option value="3S">3° Secundaria</option><option value="4S">4° Secundaria</option>
+          <option value="5S">5° Secundaria</option>
+        </optgroup>
+      </select>
+      <select class="sel-inp" id="doc-login-seccion" onchange="checkDocLogin()">
+        <option value="">Sección</option>
+        <option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option>
+      </select>
+    </div>
+  </div>
+  <div style="background:var(--puf);border-radius:12px;padding:.75rem 1rem;font-size:.75rem;color:var(--pu);font-weight:700">
+    🔒 Tu código solo se guarda en este dispositivo. No compartimos tu información.
+  </div>
+  <button class="btn-pu" id="doc-login-btn" disabled onclick="completarLoginDocente()">Ingresar al panel →</button>
+  <button onclick="go('s-profiles')" style="background:none;border:none;color:var(--gr);font-size:.82rem;font-weight:700;cursor:pointer;padding:.5rem">← Volver</button>
+</div>
+</div>
+
+<!-- ════════════ LOGIN PADRES ════════════ -->
+<div id="s-login-padre" class="screen">
+<div class="hdr-purple" style="background:linear-gradient(135deg,#1A5276,#2874A6);text-align:center;padding:2rem 1.2rem 2.5rem">
+  <img src="imagenes/animacion1.jpeg" alt="UmaKay" style="width:80px;height:80px;object-fit:contain;border-radius:50%;margin:0 auto .7rem;display:block;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))"/>
+  <div class="hdr-title">Acceso Familiar 🏠</div>
+  <div class="hdr-sub">Ingresa el código de matrícula de tu hijo/a</div>
+</div>
+<div style="padding:1.5rem 1.3rem;display:flex;flex-direction:column;gap:1.2rem;max-width:400px;margin:0 auto;width:100%">
+  <div class="form-g">
+    <label class="form-lbl">Código de matrícula del hijo/a</label>
+    <input class="form-inp" id="pad-login-codigo" type="text" placeholder="Ej: 2025-IE045-0823" oninput="checkPadreLogin()">
+    <span class="form-hint">📋 Lo encuentras en la ficha de matrícula o secretaría</span>
+  </div>
+  <div class="form-g">
+    <label class="form-lbl">Tu nombre (opcional)</label>
+    <input class="form-inp" id="pad-login-nombre" type="text" placeholder="Ej: Mamá Rosa">
+  </div>
+  <div style="background:#EBF5FB;border-radius:12px;padding:.75rem 1rem;font-size:.75rem;color:#1A5276;font-weight:700;line-height:1.5">
+    🔒 Solo verás el estado general de bienestar de tu hijo/a. Las conversaciones son privadas para que se sienta seguro/a de pedir ayuda.
+  </div>
+  <button class="btn-pu" id="pad-login-btn" disabled onclick="completarLoginPadre()" style="background:linear-gradient(135deg,#1A5276,#2874A6)">Ingresar →</button>
+  <button onclick="go('s-profiles')" style="background:none;border:none;color:var(--gr);font-size:.82rem;font-weight:700;cursor:pointer;padding:.5rem">← Volver</button>
+</div>
+</div>
+
+<!-- ════════════ REGISTRO ════════════ -->
+<div id="s-registro" class="screen">
+<div class="hdr-purple">
+  <div class="hdr-title">Registro inicial 📝</div>
+  <div class="hdr-sub">Solo necesitas tu código de matrícula</div>
+</div>
+<div class="reg-body">
+
+  <!-- PERSONAJE bienvenida registro -->
+  <div class="char-wrap">
+  <svg width="130" height="120" viewBox="0 0 130 120" class="char-bounce char-wave">
+    <!-- Cuerpo -->
+    <ellipse cx="65" cy="48" rx="28" ry="24" fill="#9B6DD4"/>
+    <ellipse cx="65" cy="48" rx="24" ry="20" fill="#B08AE0"/>
+    <!-- Pliegues -->
+    <path d="M45 42 Q52 36 60 42 Q67 48 75 42 Q81 36 86 42" stroke="#7A52B0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <path d="M46 52 Q54 46 62 52 Q69 58 77 52 Q82 46 86 52" stroke="#7A52B0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <!-- Ojos felices -->
+    <ellipse cx="54" cy="47" rx="5" ry="5.5" fill="#fff"/>
+    <ellipse cx="76" cy="47" rx="5" ry="5.5" fill="#fff"/>
+    <circle cx="55" cy="48" r="3" fill="#2D1B6B"/>
+    <circle cx="77" cy="48" r="3" fill="#2D1B6B"/>
+    <circle cx="56" cy="46.5" r="1.2" fill="#fff"/>
+    <circle cx="78" cy="46.5" r="1.2" fill="#fff"/>
+    <!-- Sonrisa grande -->
+    <path d="M57 57 Q65 64 73 57" stroke="#6B3FA0" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <!-- Mejillas -->
+    <ellipse cx="47" cy="54" rx="5" ry="3" fill="rgba(255,100,100,.2)"/>
+    <ellipse cx="83" cy="54" rx="5" ry="3" fill="rgba(255,100,100,.2)"/>
+    <!-- Bracito saludando -->
+    <ellipse cx="34" cy="58" rx="7" ry="4.5" fill="#9B6DD4" transform="rotate(-35 34 58)"/>
+    <ellipse cx="96" cy="52" rx="7" ry="4.5" fill="#9B6DD4" transform="rotate(30 96 52)" class="arm-r"/>
+    <!-- Piernas -->
+    <ellipse cx="55" cy="74" rx="7" ry="9" fill="#8B5FC0"/>
+    <ellipse cx="75" cy="74" rx="7" ry="9" fill="#8B5FC0"/>
+    <ellipse cx="54" cy="84" rx="9" ry="4.5" fill="#D4A017"/>
+    <ellipse cx="76" cy="84" rx="9" ry="4.5" fill="#D4A017"/>
+    <!-- Clipboard -->
+    <rect x="88" y="30" width="24" height="30" rx="3" fill="#fff" stroke="#D4A017" stroke-width="1.5"/>
+    <rect x="94" y="26" width="12" height="7" rx="2" fill="#D4A017"/>
+    <line x1="92" y1="40" x2="108" y2="40" stroke="#E5E7EB" stroke-width="1.5"/>
+    <line x1="92" y1="45" x2="108" y2="45" stroke="#E5E7EB" stroke-width="1.5"/>
+    <line x1="92" y1="50" x2="104" y2="50" stroke="#E5E7EB" stroke-width="1.5"/>
+  </svg>
+  </div>
+
+  <div style="text-align:center">
+    <h2 style="font-size:1.25rem;font-weight:900;color:var(--dk);margin-bottom:.4rem">¡Bienvenido/a a UmaKay! 💜</h2>
+    <p style="font-size:.83rem;color:var(--gr);line-height:1.55">Ingresa el código que te dio tu colegio. Es solo para verificar que eres estudiante — tu nombre nadie lo ve.</p>
+  </div>
+
+  <div class="form-g">
+    <label class="form-lbl">Código de matrícula 🎓</label>
+    <input class="form-inp" id="reg-codigo" type="text" placeholder="Ej: 2025-IE045-0823" oninput="checkRegBtn()">
+    <span class="form-hint">📋 Lo encuentras en tu ficha de matrícula o en secretaría</span>
+  </div>
+
+  <div class="form-g">
+    <label class="form-lbl">¿Cómo quieres que te llame? <span style="color:var(--gr);font-weight:600">(opcional)</span></label>
+    <input class="form-inp" id="reg-nombre" type="text" placeholder="Ej: Lucía, o déjalo en blanco">
+    <span class="form-hint">✨ Solo para personalizar tu experiencia — no se comparte nunca</span>
+  </div>
+
+  <div class="form-g">
+    <label class="form-lbl">¿En qué nivel estás?</label>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.7rem">
+      <button class="nivel-btn" id="nb-prim" onclick="selNivel('primaria',this)">🏫 Primaria</button>
+      <button class="nivel-btn" id="nb-secu" onclick="selNivel('secundaria',this)">🎓 Secundaria</button>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-g">
+      <label class="form-lbl">Grado</label>
+      <select class="sel-inp" id="reg-grado" onchange="checkRegBtn()" disabled>
+        <option value="">Primero elige nivel</option>
+      </select>
+    </div>
+    <div class="form-g">
+      <label class="form-lbl">Sección</label>
+      <select class="sel-inp" id="reg-seccion" onchange="checkRegBtn()">
+        <option value="">Sección</option>
+        <option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="anon-box">
+    <div class="anon-ico">🔒</div>
+    <div class="anon-txt">
+      <h4>¿Cómo protegemos tu privacidad?</h4>
+      <p>Tu código identifica que eres estudiante del colegio, pero nadie puede ver tu nombre ni el contenido de tus conversaciones. Solo el orientador ve una alerta si hay riesgo — sin saber qué dijiste.</p>
+    </div>
+  </div>
+
+  <button class="btn-pu" id="reg-btn" disabled onclick="completarRegistro()">Continuar → Evaluación inicial</button>
+</div>
+</div>
+
+<!-- ════════════ TAMIZAJE ════════════ -->
+<div id="s-tamizaje" class="screen">
+<div class="tam-hdr">
+  <div class="hdr-title">Evaluación inicial 📋</div>
+  <div class="tam-sub" id="t-sub">Pregunta 1 de 15</div>
+  <div class="tam-pb"><div class="tam-pf" id="t-pf" style="width:6%"></div></div>
+</div>
+<div class="tam-body">
+  <div class="t-blk" id="t-blk"></div>
+  <div class="t-q" id="t-q"></div>
+  <div class="t-crisis-note" id="t-crisis" style="display:none">⚠️ Esta pregunta es importante. Responde con honestidad — tus respuestas son confidenciales y solo buscan ayudarte.</div>
+  <div class="t-opts" id="t-opts"></div>
+</div>
+<div class="tam-nav">
+  <button class="btn-bk" id="t-bk" onclick="tamBack()">← Atrás</button>
+  <button class="btn-nx" id="t-nx" onclick="tamNext()" disabled>Siguiente →</button>
+</div>
+</div>
+
+<!-- ════════════ RESULTADO ════════════ -->
+<div id="s-resultado" class="screen">
+<div class="rc" id="rc">
+  <div class="confetti-c" id="confetti"></div>
+
+  <!-- PERSONAJE resultado — cambia por JS -->
+  <div class="char-wrap" id="res-char-wrap" style="margin-bottom:.3rem"></div>
+
+  <div class="rc-tag" id="rc-tag">🎓 Cargando...</div>
+  <div class="rc-niv" id="rc-niv">Analizando...</div>
+  <div class="rc-title" id="rc-title">Un momento...</div>
+  <div class="rc-txt" id="rc-txt"></div>
+
+  <div class="rc-ia">
+    <div class="rc-ia-lbl">💜 Análisis personalizado con IA</div>
+    <div class="rc-ia-txt" id="rc-ia-txt"><div class="rld-wrap"><div class="rld"></div><div class="rld"></div><div class="rld"></div></div></div>
+  </div>
+
+  <div class="rc-crisis" id="rc-crisis" style="display:none">
+    <div class="rc-crisis-t">🚨 Necesitas apoyo ahora</div>
+    <div class="rc-crisis-txt">Lo que sientes es válido y hay personas que quieren ayudarte hoy mismo.</div>
+    <div class="rc-linea">📞 Línea 113 opción 5 — 24/7 gratis y confidencial</div>
+  </div>
+
+  <button class="btn-pu" onclick="irABienvenida()" style="margin-top:.5rem">Ver qué sigue →</button>
+</div>
+</div>
+
+<!-- ════════════ BIENVENIDA ════════════ -->
+<div id="s-bienvenida" class="screen">
+<div class="bv-card">
+  <div class="char-wrap" id="bv-char"></div>
+  <div class="bv-titulo" id="bv-titulo">¡Ya estás dentro!</div>
+  <div class="bv-sub" id="bv-sub"></div>
+  <div class="bv-steps" id="bv-steps"></div>
+  <button class="btn-pu" onclick="go('s-home')">Ir a mi espacio →</button>
+</div>
+</div>
+
+<!-- ════════════ HOME ESTUDIANTE ════════════ -->
+<div id="s-home" class="screen">
+<div class="topb">
+  <div class="tbl">
+    <div class="tb-logo"><img src="imagenes/logo_umakay.png" alt="UmaKay"></div>
+    <div class="tb-nm">UmaKay</div>
+  </div>
+  <div style="display:flex;gap:.38rem;align-items:center">
+    <div id="home-grado-badge" style="font-size:.62rem;font-weight:800;color:var(--pu);background:var(--puf);border-radius:10px;padding:.2rem .55rem;display:none"></div>
+    <button class="tb-btn" onclick="cerrarSesionEstudiante()" title="Cerrar sesión">↩</button>
+  </div>
+</div>
+<div class="hero">
+  <div class="hero-hi">¡Hola! 🌟</div>
+  <div class="hero-n" id="home-saludo">¿Cómo estás hoy?</div>
+  <div class="ci-wrap">
+    <div class="ci-t">Toca cómo te sientes ahora mismo 👇</div>
+    <div class="ci-row">
+      <button class="ci-btn" onclick="mood(this,'Muy bien')"><span class="ci-e">😄</span><span class="ci-l">Muy bien</span></button>
+      <button class="ci-btn" onclick="mood(this,'Bien')"><span class="ci-e">🙂</span><span class="ci-l">Bien</span></button>
+      <button class="ci-btn" onclick="mood(this,'Regular')"><span class="ci-e">😐</span><span class="ci-l">Regular</span></button>
+      <button class="ci-btn" onclick="mood(this,'Mal')"><span class="ci-e">😔</span><span class="ci-l">Mal</span></button>
+      <button class="ci-btn" onclick="mood(this,'Muy mal')"><span class="ci-e">😢</span><span class="ci-l">Muy mal</span></button>
+    </div>
+  </div>
+</div>
+<div class="hb">
+  <div class="sec-t">🧩 Tu espacio</div>
+  <div class="mods">
+    <div class="mod cm fl" onclick="go('s-chat')">
+      <span class="mi">💬</span>
+      <div><div class="mo-t">Habla con alguien — IA disponible ahora</div><div class="mo-s">Chat anónimo 24/7 con inteligencia artificial</div></div>
+    </div>
+    <div class="mod" onclick="showBreath()"><span class="mi">🌬️</span><div class="mo-t">Respira</div><div class="mo-s">Ejercicio de calma</div></div>
+    <div class="mod" onclick="go('s-aprende')"><span class="mi">🎓</span><div class="mo-t">Aprende</div><div class="mo-s">Videos animados</div></div>
+    <div class="mod" onclick="go('s-misiones')"><span class="mi">🎮</span><div class="mo-t">Mis misiones</div><div class="mo-s">Mini retos de hoy · gana XP</div></div>
+    <div class="mod fl" onclick="go('s-cita')">
+      <span class="mi">🏥</span>
+      <div><div class="mo-t">Agendar cita en posta cercana</div><div class="mo-s">Encuentra ayuda profesional cerca de ti</div></div>
+    </div>
+  </div>
+
+  <!-- MISIONES RÁPIDAS — vista previa en home -->
+  <div class="sec-t">🎮 Misiones de hoy</div>
+  <div id="home-misiones-preview"></div>
+
+  <div class="sec-t">📈 Tu semana</div>
+  <div class="prog-box">
+    <div class="prow"><span class="plbl">Check-ins completados</span><span class="pval">4 / 7 días</span></div>
+    <div class="pbar"><div class="pfil" style="width:57%"></div></div>
+    <div class="prow" style="margin-top:.55rem"><span class="plbl">Misiones completadas</span><span class="pval" id="retos-pval">0 / 3</span></div>
+    <div class="pbar"><div class="pfil" id="retos-pfil" style="width:0%;background:linear-gradient(90deg,var(--go),var(--gol))"></div></div>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip-i">💡</div>
+    <div><div class="tip-t" id="tip-titulo">Dato de hoy</div><div class="tip-tx" id="tip-txt">Respirar profundo 3 veces activa el sistema nervioso parasimpático y reduce la ansiedad en menos de 60 segundos.</div></div>
+  </div>
+</div>
+<div class="bnav">
+  <div class="bni act"><span class="ni">🏠</span><span class="nl">Inicio</span><div class="bnd"></div></div>
+  <div class="bni" onclick="go('s-chat')"><span class="ni">💬</span><span class="nl">Chat</span></div>
+  <div class="bni" onclick="go('s-misiones')"><span class="ni">🎮</span><span class="nl">Misiones</span></div>
+  <div class="bni" onclick="go('s-aprende')"><span class="ni">🎓</span><span class="nl">Aprende</span></div>
+  <div class="bni" onclick="go('s-cita')"><span class="ni">🏥</span><span class="nl">Cita</span></div>
+</div>
+</div>
+
+<!-- ════════════ MISIONES ════════════ -->
+<div id="s-misiones" class="screen">
+<div class="hdr-purple" style="display:flex;align-items:center;gap:.7rem">
+  <button onclick="go('s-home')" style="width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:8px;border:none;color:#fff;font-size:.9rem;cursor:pointer;flex-shrink:0">←</button>
+  <div style="flex:1">
+    <div class="hdr-title">Misiones 🎮</div>
+    <div class="hdr-sub">Completa retos y gana XP cada día</div>
+  </div>
+  <div style="text-align:right">
+    <div style="color:#F0C840;font-size:.78rem;font-weight:900">⚡ <span id="xp-total">0</span> XP</div>
+    <div style="color:rgba(255,255,255,.55);font-size:.62rem">Nivel <span id="nivel-actual">1</span></div>
+  </div>
+</div>
+<div class="mis-body">
+
+  <!-- Barra de XP y nivel -->
+  <div class="xp-bar-wrap">
+    <div class="xp-bar-top">
+      <div class="xp-nivel-badge" id="xp-nivel-badge">🌱 Explorador</div>
+      <div class="xp-meta"><span id="xp-actual-n">0</span> / <span id="xp-next-n">100</span> XP</div>
+    </div>
+    <div class="xp-track">
+      <div class="xp-fill" id="xp-fill" style="width:0%"></div>
+    </div>
+    <div class="xp-niveles">
+      <span>🌱 Lv1</span><span>🌿 Lv2</span><span>🌳 Lv3</span><span>⭐ Lv4</span><span>🏆 Lv5</span>
+    </div>
+  </div>
+
+  <!-- Misiones del día -->
+  <div class="mis-seccion">🗓️ MISIONES DE HOY</div>
+  <div id="mis-hoy-list"></div>
+
+  <!-- Misiones de bienestar (según nivel tamizaje) -->
+  <div class="mis-seccion" id="mis-bienestar-lbl">💜 MISIONES DE BIENESTAR</div>
+  <div id="mis-bienestar-list"></div>
+
+  <!-- Logros desbloqueados -->
+  <div class="mis-seccion">🏆 MIS LOGROS</div>
+  <div id="logros-grid" class="logros-grid"></div>
+
+</div>
+</div>
+
+<!-- ════════════ CHAT IA ════════════ -->
+<div id="s-chat" class="screen">
+<div class="chdr">
+  <button class="cbk" onclick="go('s-home')">←</button>
+  <div class="cav">🤖</div>
+  <div class="cbi">
+    <div class="cbn">Asistente UmaKay · IA</div>
+    <div class="cbs"><div class="sdot"></div>Siempre disponible</div>
+  </div>
+  <span style="color:rgba(255,255,255,.5);font-size:.8rem">🔒</span>
+</div>
+<div class="cmsgs" id="cmsgs"></div>
+<div class="iabox">
+  <div class="anon-badge">🔒 Anónimo · Solo tú puedes leer esto</div>
+  <div class="inpr">
+    <textarea class="cinp" id="cinp" placeholder="Escribe lo que quieras..." rows="1"
+      onkeydown="handleKey(event)" oninput="autoR(this)"></textarea>
+    <button class="csnd" id="sbtn" onclick="sendMsg()">➤</button>
+  </div>
+</div>
+</div>
+
+<!-- ════════════ APRENDE ════════════ -->
+<div id="s-aprende" class="screen">
+<div class="hdr-purple" style="display:flex;align-items:center;gap:.7rem">
+  <button onclick="go('s-home')" style="width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:8px;border:none;color:#fff;font-size:.9rem;cursor:pointer;flex-shrink:0">←</button>
+  <div style="flex:1"><div class="hdr-title">Aprende 🎓 <span id="apr-nivel-badge" style="display:none;font-size:.65rem;background:rgba(255,255,255,.2);border-radius:12px;padding:.2rem .6rem;vertical-align:middle;font-family:Nunito,sans-serif;font-weight:800"></span></div><div class="hdr-sub">Videos animados sobre tu mente</div></div>
+  <div style="background:rgba(212,160,23,.25);border-radius:20px;padding:.28rem .65rem;font-size:.73rem;font-weight:800;color:#F0C840">⭐ <span id="apr-pts-v">0</span></div>
+</div>
+<div class="apr-body">
+
+  <!-- Racha de aprendizaje -->
+  <div class="streak-box">
+    <div class="streak-ico">🔥</div>
+    <div class="streak-t"><h4 id="apr-streak-msg">¡Empieza tu racha hoy!</h4><p>Ve un video y gana 10 puntos ⭐</p></div>
+    <div class="streak-n" id="apr-streak-n">0</div>
+  </div>
+
+  <!-- PERSONAJES DE EMOCIONES — filtros estilo Intensamente -->
+  <div style="font-size:.73rem;font-weight:800;color:var(--gr);margin-bottom:.4rem;letter-spacing:.5px">¿QUÉ QUIERES APRENDER HOY?</div>
+  <div class="emo-chars-grid">
+    <button class="echar-big act" id="eb-todos" onclick="filtrarVideos('todos',this,'eb-todos')">
+      <div class="echar-big-face" style="background:linear-gradient(135deg,#6B3FA0,#B07AE0)">🌟</div>
+      <div class="echar-big-name">Todos</div>
+    </button>
+    <button class="echar-big" id="eb-ansiedad" onclick="filtrarVideos('ansiedad',this,'eb-ansiedad')">
+      <div class="echar-big-face" style="background:linear-gradient(135deg,#F59E0B,#FDE68A);color:#92400E">😰</div>
+      <div class="echar-big-name">Ansiedad</div>
+    </button>
+    <button class="echar-big" id="eb-depresion" onclick="filtrarVideos('depresion',this,'eb-depresion')">
+      <div class="echar-big-face" style="background:linear-gradient(135deg,#3B82F6,#93C5FD);color:#1E3A8A">😔</div>
+      <div class="echar-big-name">Tristeza</div>
+    </button>
+    <button class="echar-big" id="eb-autoestima" onclick="filtrarVideos('autoestima',this,'eb-autoestima')">
+      <div class="echar-big-face" style="background:linear-gradient(135deg,#10B981,#6EE7B7);color:#065F46">💪</div>
+      <div class="echar-big-name">Autoestima</div>
+    </button>
+    <button class="echar-big" id="eb-estres" onclick="filtrarVideos('estres',this,'eb-estres')">
+      <div class="echar-big-face" style="background:linear-gradient(135deg,#EF4444,#FCA5A5);color:#7F1D1D">📚</div>
+      <div class="echar-big-name">Estrés</div>
+    </button>
+    <button class="echar-big" id="eb-emociones" onclick="filtrarVideos('emociones',this,'eb-emociones')">
+      <div class="echar-big-face" style="background:linear-gradient(135deg,#EC4899,#F9A8D4);color:#831843">❤️</div>
+      <div class="echar-big-name">Emociones</div>
+    </button>
+  </div>
+
+  <!-- Banner dinámico de categoría -->
+  <div id="apr-banner" class="apr-cat-banner">
+    <div id="apr-banner-ico" style="font-size:1.6rem">🌟</div>
+    <div>
+      <div id="apr-banner-t" style="font-size:.88rem;font-weight:900;color:var(--dk)">Todos los temas</div>
+      <div id="apr-banner-s" style="font-size:.71rem;color:var(--gr);margin-top:.08rem">Videos animados de Psych2Go en español</div>
+    </div>
+  </div>
+
+  <div id="videos-list"></div>
+
+  <!-- Créditos Psych2Go -->
+  <div style="background:#1A0A2E;border-radius:16px;padding:.9rem 1rem;display:flex;align-items:center;gap:.8rem;margin-top:.3rem">
+    <div style="font-size:1.4rem">🎬</div>
+    <div>
+      <div style="font-weight:800;font-size:.8rem;color:#fff">Psych2Go Español</div>
+      <div style="font-size:.7rem;color:rgba(255,255,255,.55);margin-top:.1rem">Canal animado · +1M suscriptores · Salud mental para jóvenes</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ════════════ CITA ════════════ -->
+<div id="s-cita" class="screen">
+<div class="hdr-purple" style="display:flex;align-items:center;gap:.7rem">
+  <button onclick="go('s-home')" style="width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:8px;border:none;color:#fff;font-size:.9rem;cursor:pointer;flex-shrink:0">←</button>
+  <div><div class="hdr-title">Agendar cita 🏥</div><div class="hdr-sub">Postas cercanas a tu colegio</div></div>
+</div>
+<div class="cita-body">
+
+  <!-- PERSONAJE cita -->
+  <div class="char-wrap">
+    <img src="imagenes/animacion1.jpeg" alt="UmaKay" class="char-bounce" style="width:110px;height:110px;object-fit:contain;border-radius:50%;filter:drop-shadow(0 4px 14px rgba(107,63,160,.28))"/>
+  </div>
+
+  <div><div class="sec-t">📍 Selecciona una posta</div><div style="font-size:.75rem;color:var(--gr);margin-top:.28rem;font-weight:600">Ordenadas por distancia a tu colegio</div></div>
+
+  <div style="display:flex;flex-direction:column;gap:.7rem">
+    <div class="posta-card" id="p1" onclick="selPosta('p1','C.S. Santa Rosa','0.8 km')">
+      <div class="posta-top">
+        <div class="posta-ico">🏥</div>
+        <div><div class="posta-nm">C.S. Santa Rosa</div><div class="posta-dt">📍 Av. Los Pinos 234 · 0.8 km</div></div>
+      </div>
+      <div class="posta-tags"><span class="ptag gn">✅ Disponible hoy</span><span class="ptag">Lun-Sáb 7am-7pm</span><span class="ptag">☎️ 01-234-5678</span></div>
+    </div>
+    <div class="posta-card" id="p2" onclick="selPosta('p2','C.S. Los Olivos','1.4 km')">
+      <div class="posta-top">
+        <div class="posta-ico">🏥</div>
+        <div><div class="posta-nm">C.S. Los Olivos</div><div class="posta-dt">📍 Jr. Las Flores 890 · 1.4 km</div></div>
+      </div>
+      <div class="posta-tags"><span class="ptag gn">✅ Disponible mañana</span><span class="ptag">Lun-Vie 8am-6pm</span><span class="ptag">☎️ 01-345-6789</span></div>
+    </div>
+    <div class="posta-card" id="p3" onclick="selPosta('p3','C.S. Villa María','2.1 km')">
+      <div class="posta-top">
+        <div class="posta-ico">🏥</div>
+        <div><div class="posta-nm">C.S. Villa María</div><div class="posta-dt">📍 Av. Central 567 · 2.1 km</div></div>
+      </div>
+      <div class="posta-tags"><span class="ptag">Lun-Sáb 7am-5pm</span><span class="ptag">☎️ 01-456-7890</span></div>
+    </div>
+  </div>
+
+  <div><div class="sec-t">📅 ¿Qué día prefieres?</div>
+  <div class="hora-grid" style="margin-top:.65rem">
+    <div class="hora-btn" id="d1" onclick="selDia('d1','Mañana')"><div class="hora-dia">Mañana</div><div class="hora-hrs">Mar 8 de marzo</div></div>
+    <div class="hora-btn" id="d2" onclick="selDia('d2','Pasado mañana')"><div class="hora-dia">Pasado mañana</div><div class="hora-hrs">Mié 9 de marzo</div></div>
+    <div class="hora-btn" id="d3" onclick="selDia('d3','Esta semana')"><div class="hora-dia">Esta semana</div><div class="hora-hrs">Jue 10 o Vie 11</div></div>
+    <div class="hora-btn" id="d4" onclick="selDia('d4','La próxima semana')"><div class="hora-dia">La próxima semana</div><div class="hora-hrs">A partir del Lun 13</div></div>
+  </div></div>
+
+  <div><div class="sec-t">🕐 ¿Mañana o tarde?</div>
+  <div class="turno-row" style="margin-top:.65rem">
+    <div class="turno-btn" id="tm" onclick="selTurno('tm','Mañana')"><span class="turno-e">🌅</span><span class="turno-t">Mañana</span></div>
+    <div class="turno-btn" id="tt" onclick="selTurno('tt','Tarde')"><span class="turno-e">🌇</span><span class="turno-t">Tarde</span></div>
+  </div></div>
+
+  <button class="btn-pu" id="cita-btn" disabled onclick="confirmarCita()">Confirmar cita →</button>
+</div>
+</div>
+
+<!-- ════════════ CONFIRM CITA ════════════ -->
+<div id="s-confirmcita" class="screen">
+<div class="conf-card">
+  <div style="font-size:.75rem;color:var(--pu);font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:.9rem">Tu cita está confirmada ✅</div>
+  <div class="qr-box"><div class="qr-inner" id="qr-grid"></div></div>
+  <div style="font-size:1.2rem;font-weight:900;color:var(--dk);margin-bottom:.45rem">Muestra este QR en la posta</div>
+  <div style="font-size:.8rem;color:var(--gr);line-height:1.55;margin-bottom:1rem">El personal de salud recibirá solo el contexto básico necesario para atenderte. Tu nombre no aparece.</div>
+  <div style="background:var(--puf);border-radius:12px;padding:.9rem;text-align:left;margin-bottom:.9rem">
+    <div class="conf-row"><span class="conf-key">Posta</span><span class="conf-val" id="c-posta">—</span></div>
+    <div class="conf-row"><span class="conf-key">Día preferido</span><span class="conf-val" id="c-dia">—</span></div>
+    <div class="conf-row"><span class="conf-key">Turno</span><span class="conf-val" id="c-turno">—</span></div>
+    <div class="conf-row"><span class="conf-key">Nivel de atención</span><span class="conf-val" id="c-nivel">—</span></div>
+  </div>
+  <div class="conf-anon">✅ Tu nombre NO aparece en este QR · Datos encriptados</div>
+  <button class="btn-pu" onclick="go('s-home')">Volver al inicio →</button>
+</div>
+</div>
+
+<!-- ════════════ BREATHING ════════════ -->
+<div id="bov">
+<div class="blbl">Ejercicio de respiración</div>
+
+<!-- PERSONAJE respiración animado -->
+<svg width="120" height="120" viewBox="0 0 120 120" id="breath-char" style="margin-bottom:1.2rem;transition:transform 4s ease">
+  <ellipse cx="60" cy="52" rx="28" ry="24" fill="#9B6DD4"/>
+  <ellipse cx="60" cy="52" rx="24" ry="20" fill="#B08AE0"/>
+  <path d="M40 46 Q47 40 55 46 Q62 52 70 46 Q76 40 82 46" stroke="#7A52B0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <ellipse cx="49" cy="51" rx="5" ry="5.5" fill="#fff"/>
+  <ellipse cx="71" cy="51" rx="5" ry="5.5" fill="#fff"/>
+  <circle cx="50" cy="52" r="3" fill="#2D1B6B" id="eye-l"/>
+  <circle cx="72" cy="52" r="3" fill="#2D1B6B" id="eye-r"/>
+  <circle cx="51" cy="50.5" r="1.2" fill="#fff"/>
+  <circle cx="73" cy="50.5" r="1.2" fill="#fff"/>
+  <path d="M52 61 Q60 67 68 61" stroke="#6B3FA0" stroke-width="2.2" fill="none" stroke-linecap="round" id="mouth"/>
+  <!-- Ondas de respiración -->
+  <ellipse cx="25" cy="52" rx="0" ry="0" fill="rgba(212,160,23,.4)" id="wave1" style="transition:all 4s ease"/>
+  <ellipse cx="95" cy="52" rx="0" ry="0" fill="rgba(212,160,23,.4)" id="wave2" style="transition:all 4s ease"/>
+</svg>
+
+<div class="bcirc" id="bcirc">Inhala</div>
+<div class="bact" id="bact">Inhala lentamente...</div>
+<div class="bnum" id="bnum">4</div>
+<button class="bcls" onclick="stopBreath()">Cerrar ✕</button>
+</div>
+
+<!-- ════════════ HOME DOCENTE ════════════ -->
+<div id="s-docente" class="screen">
+<div class="hdr-purple" style="display:flex;align-items:center;justify-content:space-between;gap:.7rem">
+  <div style="display:flex;align-items:center;gap:.7rem;flex:1">
+    <div>
+      <div class="hdr-title">Docente 📚</div>
+      <div class="hdr-sub" id="doc-nombre-badge">Panel de bienestar del aula</div>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.4rem">
+    <div style="background:rgba(212,160,23,.2);border-radius:20px;padding:.3rem .75rem;font-size:.72rem;font-weight:900;color:#F0C840" id="doc-fecha-badge">Cargando…</div>
+    <button class="logout-btn" onclick="cerrarSesionDocente()">↩ Cerrar sesión</button>
+  </div>
+</div>
+<div style="padding:1.2rem 1.1rem 6rem;display:flex;flex-direction:column;gap:1.2rem">
+
+  <div style="background:linear-gradient(135deg,#4A2575,#6B3FA0);border-radius:18px;padding:1.1rem 1.2rem;color:#fff">
+    <div style="font-size:.7rem;font-weight:700;opacity:.65;margin-bottom:.2rem;text-transform:uppercase;letter-spacing:1px">Bienvenido/a</div>
+    <div style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900">Prof. Docente · UmaKay</div>
+    <div style="font-size:.76rem;opacity:.7;margin-top:.15rem">Tu aula tiene alertas activas hoy 👇</div>
+  </div>
+
+  <!-- SEMÁFORO DEL AULA -->
+  <div style="font-size:.67rem;font-weight:900;color:var(--gr);letter-spacing:1.5px">🚦 SEMÁFORO DEL AULA — 3°B</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem">
+    <div class="semaf-card" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border:2px solid #10B981">
+      <div style="font-size:1.6rem">🟢</div>
+      <div style="font-size:1.55rem;font-weight:900;color:#065F46">18</div>
+      <div style="font-size:.6rem;font-weight:800;color:#065F46;text-align:center">Bienestar<br>estable</div>
+    </div>
+    <div class="semaf-card" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border:2px solid #F59E0B">
+      <div style="font-size:1.6rem">🟡</div>
+      <div style="font-size:1.55rem;font-weight:900;color:#92400E">7</div>
+      <div style="font-size:.6rem;font-weight:800;color:#92400E;text-align:center">Señales<br>de alerta</div>
+    </div>
+    <div class="semaf-card" style="background:linear-gradient(135deg,#FFF5F5,#FEE2E2);border:2px solid #EF4444">
+      <div style="font-size:1.6rem">🔴</div>
+      <div style="font-size:1.55rem;font-weight:900;color:#991B1B">2</div>
+      <div style="font-size:.6rem;font-weight:800;color:#991B1B;text-align:center">Atención<br>prioritaria</div>
+    </div>
+  </div>
+
+  <!-- ALERTAS -->
+  <div style="font-size:.67rem;font-weight:900;color:var(--gr);letter-spacing:1.5px">🔔 ALERTAS ACTIVAS</div>
+  <div class="alerta-card alerta-naranja">
+    <div class="alerta-ico">🟠</div>
+    <div style="flex:1">
+      <div style="font-size:.84rem;font-weight:900;color:#78350F">Alumno/a · 3°B</div>
+      <div style="font-size:.72rem;color:#92400E;margin-top:.1rem">Indicadores de violencia en el hogar — requiere conversación privada</div>
+      <div style="font-size:.65rem;color:#B45309;margin-top:.22rem;font-weight:700">⚡ Hace 2 horas · Protocolo SÍSEVE recomendado</div>
+    </div>
+    <button onclick="go('s-doc-protocolo')" style="background:#F59E0B;color:#fff;border:none;border-radius:10px;padding:.4rem .65rem;font-size:.65rem;font-weight:800;cursor:pointer;flex-shrink:0;line-height:1.4">Ver<br>protocolo</button>
+  </div>
+  <div class="alerta-card alerta-roja">
+    <div class="alerta-ico">🔴</div>
+    <div style="flex:1">
+      <div style="font-size:.84rem;font-weight:900;color:#7F1D1D">Alumno/a · 3°B</div>
+      <div style="font-size:.72rem;color:#991B1B;margin-top:.1rem">Nivel rojo en tamizaje — atención prioritaria de salud mental</div>
+      <div style="font-size:.65rem;color:#B91C1C;margin-top:.22rem;font-weight:700">⚡ Ayer · Derivar a posta de salud</div>
+    </div>
+    <button onclick="go('s-cita')" style="background:#EF4444;color:#fff;border:none;border-radius:10px;padding:.4rem .65rem;font-size:.65rem;font-weight:800;cursor:pointer;flex-shrink:0;line-height:1.4">Gestionar<br>cita</button>
+  </div>
+
+  <!-- ACCIONES -->
+  <div style="font-size:.67rem;font-weight:900;color:var(--gr);letter-spacing:1.5px">⚡ ACCIONES RÁPIDAS</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.7rem">
+    <button class="doc-action-btn" onclick="go('s-doc-protocolo')"><span style="font-size:1.35rem">📋</span><span style="font-size:.76rem;font-weight:800">Protocolo de<br>actuación</span></button>
+    <button class="doc-action-btn" onclick="go('s-doc-cap')"><span style="font-size:1.35rem">🎓</span><span style="font-size:.76rem;font-weight:800">Capacitaciones<br>docentes</span></button>
+    <button class="doc-action-btn" onclick="alert('🔗 En producción:\nsiseve.minedu.gob.pe\n\nRegistra el caso directamente\nen el sistema nacional.')"><span style="font-size:1.35rem">🛡️</span><span style="font-size:.76rem;font-weight:800">Ir a<br>SÍSEVE</span></button>
+    <button class="doc-action-btn" onclick="alert('📊 Reporte del aula generado\n\nEn producción: PDF con datos\nagregados y anónimos del aula.')"><span style="font-size:1.35rem">📊</span><span style="font-size:.76rem;font-weight:800">Generar<br>reporte</span></button>
+  </div>
+
+  <!-- TENDENCIA -->
+  <div style="background:#fff;border-radius:18px;padding:1.1rem 1.1rem .9rem;box-shadow:0 3px 12px rgba(107,63,160,.09)">
+    <div style="font-size:.82rem;font-weight:900;color:var(--dk);margin-bottom:.8rem">📈 Tendencia esta semana</div>
+    <div style="display:flex;align-items:flex-end;gap:.35rem;height:56px;margin-bottom:.45rem">
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem"><div style="background:var(--pu);border-radius:4px 4px 0 0;width:100%;height:32px"></div><div style="font-size:.58rem;color:var(--gr);font-weight:700">Lun</div></div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem"><div style="background:var(--pu);border-radius:4px 4px 0 0;width:100%;height:24px"></div><div style="font-size:.58rem;color:var(--gr);font-weight:700">Mar</div></div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem"><div style="background:var(--gol);border-radius:4px 4px 0 0;width:100%;height:42px"></div><div style="font-size:.58rem;color:var(--gr);font-weight:700">Mié</div></div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem"><div style="background:var(--pu);border-radius:4px 4px 0 0;width:100%;height:18px"></div><div style="font-size:.58rem;color:var(--gr);font-weight:700">Jue</div></div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem"><div style="background:var(--pul);border-radius:4px 4px 0 0;width:100%;height:36px"></div><div style="font-size:.58rem;color:var(--gr);font-weight:700">Vie</div></div>
+    </div>
+    <div style="font-size:.69rem;color:var(--gr)">📌 Check-ins completados por día · esta semana</div>
+  </div>
+
+  <!-- LÍNEAS DE APOYO -->
+  <div style="background:linear-gradient(135deg,#1A0A2E,#2D0F5E);border-radius:16px;padding:1rem 1.1rem">
+    <div style="font-size:.8rem;font-weight:900;color:#fff;margin-bottom:.55rem">📞 Líneas de apoyo — docentes</div>
+    <div style="font-size:.73rem;color:rgba(255,255,255,.75);line-height:1.8">
+      🆘 <b style="color:#fff">Línea 113 opción 5</b> — Salud mental, 24h gratuita<br>
+      👨‍👩‍👧 <b style="color:#fff">DEMUNA 0800-22-833</b> — Maltrato infantil, gratis<br>
+      🛡️ <b style="color:#fff">CEM 100</b> — Centro Emergencia Mujer, 24h<br>
+      📋 <b style="color:#fff">SÍSEVE</b> — siseve.minedu.gob.pe
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════ CAPACITACIONES DOCENTE ════════════ -->
+<div id="s-doc-cap" class="screen">
+<div class="hdr-purple" style="display:flex;align-items:center;gap:.7rem">
+  <button onclick="go('s-docente')" style="width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:8px;border:none;color:#fff;font-size:.9rem;cursor:pointer;flex-shrink:0">←</button>
+  <div style="flex:1"><div class="hdr-title">Capacitaciones 🎓</div><div class="hdr-sub">Formación en salud mental escolar</div></div>
+  <div style="background:rgba(255,255,255,.15);border-radius:10px;padding:.25rem .6rem;font-size:.65rem;font-weight:800;color:#fff">8 videos</div>
+</div>
+<div style="padding:1.2rem 1.1rem 3rem;display:flex;flex-direction:column;gap:1rem">
+
+  <div style="background:linear-gradient(135deg,var(--puf),#EDE7F6);border-radius:14px;padding:.85rem 1rem;border:1.5px solid rgba(107,63,160,.18)">
+    <div style="font-size:.82rem;font-weight:900;color:var(--dk)">📌 Todos los recursos son gratuitos — emitidos por MINSA, MINEDU, UNICEF u OMS.</div>
+  </div>
+
+  <!-- Categorías -->
+  <div style="display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.3rem;scrollbar-width:none">
+    <div class="doc-cat-btn active" onclick="filterDocCaps('todo',this)">✨ Todo</div>
+    <div class="doc-cat-btn" onclick="filterDocCaps('deteccion',this)">🔍 Detección</div>
+    <div class="doc-cat-btn" onclick="filterDocCaps('intervencion',this)">🤝 Intervención</div>
+    <div class="doc-cat-btn" onclick="filterDocCaps('autocuidado',this)">🧘 Autocuidado</div>
+    <div class="doc-cat-btn" onclick="filterDocCaps('familia',this)">👨‍👩‍👧 Familia</div>
+  </div>
+
+  <!-- Lista dinámica -->
+  <div id="doc-cap-list" style="display:flex;flex-direction:column;gap:.85rem"></div>
+
+  <!-- Recursos externos -->
+  <div style="font-size:.67rem;font-weight:900;color:var(--gr);letter-spacing:1.5px;margin-top:.3rem">📖 CURSOS Y GUÍAS ONLINE</div>
+  <div class="cur-card" onclick="window.open('https://www.perueduca.pe','_blank')">
+    <div class="cur-ico" style="background:linear-gradient(135deg,#EDE7F6,#D1C4E9)">🇵🇪</div>
+    <div style="flex:1"><div style="font-size:.84rem;font-weight:900;color:var(--dk)">PerúEduca — Salud Mental Docente</div><div style="font-size:.7rem;color:var(--gr);margin-top:.08rem">Plataforma oficial MINEDU · Certificado gratuito · 20h</div></div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--pu)">Ir →</div>
+  </div>
+  <div class="cur-card" onclick="window.open('https://www.coursera.org/learn/science-of-well-being','_blank')">
+    <div class="cur-ico" style="background:linear-gradient(135deg,#DBEAFE,#BFDBFE)">🌐</div>
+    <div style="flex:1"><div style="font-size:.84rem;font-weight:900;color:var(--dk)">Yale — The Science of Well-Being (Coursera)</div><div style="font-size:.7rem;color:var(--gr);margin-top:.08rem">Certificado gratuito · Subtítulos español · 19h</div></div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--pu)">Ir →</div>
+  </div>
+  <div class="cur-card" onclick="window.open('https://www.who.int/es/tools/mhGAP','_blank')">
+    <div class="cur-ico" style="background:linear-gradient(135deg,#D1FAE5,#A7F3D0)">🏥</div>
+    <div style="flex:1"><div style="font-size:.84rem;font-weight:900;color:var(--dk)">OMS — Guía mhGAP para entornos educativos</div><div style="font-size:.7rem;color:var(--gr);margin-top:.08rem">Intervención en salud mental · Español · PDF gratis</div></div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--pu)">Ir →</div>
+  </div>
+
+</div>
+</div>
+
+<!-- ════════════ PROTOCOLO DOCENTE ════════════ -->
+<div id="s-doc-protocolo" class="screen">
+<div class="hdr-purple" style="display:flex;align-items:center;gap:.7rem">
+  <button onclick="go('s-docente')" style="width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:8px;border:none;color:#fff;font-size:.9rem;cursor:pointer;flex-shrink:0">←</button>
+  <div><div class="hdr-title">Protocolo 📋</div><div class="hdr-sub">Pasos de actuación por nivel de alerta</div></div>
+</div>
+<div style="padding:1.2rem 1.1rem 3rem;display:flex;flex-direction:column;gap:1rem">
+
+  <div class="proto-card" style="border-left:4px solid #EF4444">
+    <div class="proto-header" style="color:#991B1B">🔴 ALERTA ROJA — Salud mental prioritaria</div>
+    <div class="proto-step"><span class="proto-num" style="background:#EF4444">1</span><span>Contacta al alumno/a en privado ese mismo día</span></div>
+    <div class="proto-step"><span class="proto-num" style="background:#EF4444">2</span><span>Informa al orientador/psicólogo del colegio</span></div>
+    <div class="proto-step"><span class="proto-num" style="background:#EF4444">3</span><span>Notifica a los padres (solo si no hay riesgo de abuso familiar)</span></div>
+    <div class="proto-step"><span class="proto-num" style="background:#EF4444">4</span><span>Deriva a la posta de salud más cercana con carta de referencia</span></div>
+    <div style="background:#FEE2E2;border-radius:10px;padding:.55rem .8rem;font-size:.71rem;color:#991B1B;font-weight:700;margin-top:.2rem">📞 Línea 113 opción 5 si hay riesgo inmediato</div>
+  </div>
+
+  <div class="proto-card" style="border-left:4px solid #F59E0B">
+    <div class="proto-header" style="color:#92400E">🟠 ALERTA NARANJA — Indicadores de maltrato</div>
+    <div class="proto-step"><span class="proto-num" style="background:#F59E0B">1</span><span>Conversa en privado con el alumno/a — con calma, sin presión</span></div>
+    <div class="proto-step"><span class="proto-num" style="background:#F59E0B">2</span><span><b>NO notifiques a los padres</b> si el agresor puede ser familiar</span></div>
+    <div class="proto-step"><span class="proto-num" style="background:#F59E0B">3</span><span>Contacta a la DEMUNA: 0800-22-833 (gratuita, 24h)</span></div>
+    <div class="proto-step"><span class="proto-num" style="background:#F59E0B">4</span><span>Registra el caso en SÍSEVE: siseve.minedu.gob.pe</span></div>
+    <div style="background:#FEF3C7;border-radius:10px;padding:.55rem .8rem;font-size:.71rem;color:#92400E;font-weight:700;margin-top:.2rem">🛡️ CEM 100 si hay violencia activa en el hogar</div>
+  </div>
+
+  <div class="proto-card" style="border-left:4px solid #F59E0B">
+    <div class="proto-header" style="color:#92400E">🟡 ALERTA AMARILLA — Señales emocionales</div>
+    <div class="proto-step"><span class="proto-num" style="background:#F59E0B">1</span><span>Presta atención especial durante la semana en clase</span></div>
+    <div class="proto-step"><span class="proto-num" style="background:#F59E0B">2</span><span>Genera un momento de conversación casual, sin forzar</span></div>
+    <div class="proto-step"><span class="proto-num" style="background:#F59E0B">3</span><span>Si persiste más de 1 semana, informa al orientador</span></div>
+  </div>
+
+  <div class="proto-card" style="border-left:4px solid var(--pu)">
+    <div class="proto-header" style="color:var(--pud)">💜 ALERTA BROMA REITERADA</div>
+    <div class="proto-step"><span class="proto-num" style="background:var(--pu)">1</span><span>El sistema detectó uso inapropiado repetido de la app</span></div>
+    <div class="proto-step"><span class="proto-num" style="background:var(--pu)">2</span><span>Convoca al alumno/a y explica el valor del recurso</span></div>
+    <div class="proto-step"><span class="proto-num" style="background:var(--pu)">3</span><span>Recuerda: detrás de una broma puede haber algo real</span></div>
+  </div>
+
+  <div style="background:linear-gradient(135deg,#1A0A2E,#2D0F5E);border-radius:16px;padding:1rem 1.1rem">
+    <div style="font-size:.8rem;font-weight:900;color:#fff;margin-bottom:.55rem">📋 Marco legal de referencia</div>
+    <div style="font-size:.72rem;color:rgba(255,255,255,.75);line-height:1.8">
+      📜 <b style="color:#fff">Ley 29719</b> — Ley antibullying escolar<br>
+      📜 <b style="color:#fff">DS 010-2012-ED</b> — Reglamento convivencia escolar<br>
+      📜 <b style="color:#fff">RVM 212-2020</b> — Orientaciones para salud mental escolar<br>
+      🌐 <span style="text-decoration:underline;cursor:pointer;color:var(--gol)" onclick="window.open('https://siseve.minedu.gob.pe','_blank')">siseve.minedu.gob.pe</span>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ════════════ HOME PADRES ════════════ -->
+<div id="s-padres" class="screen">
+<div class="hdr-purple" style="background:linear-gradient(135deg,#1A5276,#2874A6);display:flex;align-items:center;justify-content:space-between;gap:.7rem">
+  <div>
+    <div class="hdr-title">Familia 🏠</div>
+    <div class="hdr-sub" id="pad-nombre-badge">Acompaña el bienestar de tu hijo/a</div>
+  </div>
+  <button class="logout-btn" onclick="cerrarSesionPadre()">↩ Cerrar sesión</button>
+</div>
+<div style="padding:1.2rem 1.1rem 5.5rem;display:flex;flex-direction:column;gap:1.2rem">
+
+  <div style="background:linear-gradient(135deg,#1A5276,#2874A6);border-radius:18px;padding:1.1rem 1.2rem;color:#fff">
+    <div style="font-size:.7rem;font-weight:700;opacity:.65;margin-bottom:.18rem;text-transform:uppercase;letter-spacing:1px">Hola familia</div>
+    <div style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900">Tu hijo/a usa UmaKay 💙</div>
+    <div style="font-size:.76rem;opacity:.7;margin-top:.15rem">Acompáñale sin invadir su privacidad</div>
+  </div>
+
+  <!-- ESTADO GENERAL ANÓNIMO -->
+  <div style="font-size:.67rem;font-weight:900;color:var(--gr);letter-spacing:1.5px">💙 ESTADO GENERAL DE TU HIJO/A</div>
+  <div style="background:#fff;border-radius:18px;padding:1.1rem 1.2rem;box-shadow:0 3px 12px rgba(26,82,118,.09);border:2px solid #D6EAF8">
+    <div style="display:flex;align-items:center;gap:.9rem;margin-bottom:.75rem">
+      <div style="width:50px;height:50px;background:linear-gradient(135deg,#D6EAF8,#AED6F1);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.6rem">🟢</div>
+      <div><div style="font-size:.95rem;font-weight:900;color:#1A5276">Bienestar estable</div><div style="font-size:.72rem;color:var(--gr);margin-top:.08rem">Última actualización: hoy</div></div>
+    </div>
+    <div style="background:#EBF5FB;border-radius:12px;padding:.65rem .85rem;font-size:.73rem;color:#1A5276;font-weight:600;line-height:1.5">
+      🔒 <b>Nota:</b> No podemos mostrarte el contenido de las conversaciones — eso garantiza que tu hijo/a se sienta seguro de pedir ayuda. Solo verás el nivel general de bienestar.
+    </div>
+  </div>
+
+  <!-- ACCIONES PADRE/MADRE -->
+  <div style="font-size:.67rem;font-weight:900;color:var(--gr);letter-spacing:1.5px">⚡ ¿QUÉ PUEDES HACER HOY?</div>
+  <div style="display:flex;flex-direction:column;gap:.7rem">
+    <button class="pad-action" onclick="go('s-pad-cap')">
+      <div class="pad-action-ico" style="background:linear-gradient(135deg,#EDE7F6,#D1C4E9)">🎓</div>
+      <div style="flex:1;text-align:left"><div style="font-size:.86rem;font-weight:900;color:var(--dk)">Capacítate — aprende a acompañarle</div><div style="font-size:.71rem;color:var(--gr);margin-top:.07rem">Videos y guías gratuitas para padres · recomendados por psicólogos</div></div>
+      <div style="font-size:.9rem;color:var(--pu)">›</div>
+    </button>
+    <button class="pad-action" onclick="go('s-pad-consejos')">
+      <div class="pad-action-ico" style="background:linear-gradient(135deg,#FEF3C7,#FDE68A)">💬</div>
+      <div style="flex:1;text-align:left"><div style="font-size:.86rem;font-weight:900;color:var(--dk)">Cómo hablar con tu hijo/a</div><div style="font-size:.71rem;color:var(--gr);margin-top:.07rem">Técnicas que funcionan — y errores comunes que cierran el diálogo</div></div>
+      <div style="font-size:.9rem;color:var(--pu)">›</div>
+    </button>
+    <button class="pad-action" onclick="go('s-cita')">
+      <div class="pad-action-ico" style="background:linear-gradient(135deg,#D1FAE5,#A7F3D0)">🏥</div>
+      <div style="flex:1;text-align:left"><div style="font-size:.86rem;font-weight:900;color:var(--dk)">Agendar cita para tu hijo/a</div><div style="font-size:.71rem;color:var(--gr);margin-top:.07rem">Posta de salud más cercana al colegio — mismo día</div></div>
+      <div style="font-size:.9rem;color:var(--pu)">›</div>
+    </button>
+  </div>
+
+  <!-- SEÑALES DE ALERTA -->
+  <div style="font-size:.67rem;font-weight:900;color:var(--gr);letter-spacing:1.5px">🚨 SEÑALES QUE DEBES CONOCER</div>
+  <div style="background:#fff;border-radius:18px;padding:1rem 1.1rem;box-shadow:0 3px 12px rgba(0,0,0,.07)">
+    <div class="senal-item"><span class="senal-ico">😴</span><span class="senal-txt">Duerme mucho más o mucho menos de lo habitual</span></div>
+    <div class="senal-item"><span class="senal-ico">📵</span><span class="senal-txt">Se aísla y deja de ver a sus amigos</span></div>
+    <div class="senal-item"><span class="senal-ico">📚</span><span class="senal-txt">Baja repentina en sus notas sin motivo aparente</span></div>
+    <div class="senal-item"><span class="senal-ico">😠</span><span class="senal-txt">Cambios bruscos de humor sin explicación</span></div>
+    <div class="senal-item"><span class="senal-ico">🍽️</span><span class="senal-txt">Come mucho menos o mucho más de lo normal</span></div>
+    <div class="senal-item" style="border:none"><span class="senal-ico">📱</span><span class="senal-txt">Borra conversaciones o es muy secreto/a con el celular</span></div>
+    <div style="background:#FEE2E2;border-radius:10px;padding:.55rem .8rem;font-size:.72rem;color:#991B1B;font-weight:700;margin-top:.35rem">🚨 Si ves 3 o más señales simultáneas: agenda una cita profesional esta semana</div>
+  </div>
+
+  <!-- LÍNEAS DE APOYO -->
+  <div style="background:linear-gradient(135deg,#1A5276,#154360);border-radius:16px;padding:1rem 1.1rem">
+    <div style="font-size:.8rem;font-weight:900;color:#fff;margin-bottom:.55rem">📞 Líneas de ayuda para familias</div>
+    <div style="font-size:.73rem;color:rgba(255,255,255,.8);line-height:1.8">
+      🧠 <b style="color:#fff">Línea 113 opción 5</b> — Salud mental, 24h gratis<br>
+      👨‍👩‍👧 <b style="color:#fff">DEMUNA 0800-22-833</b> — Protección infantil, gratis<br>
+      🛡️ <b style="color:#fff">CEM 100</b> — Violencia familiar, 24h gratuita<br>
+      💬 <b style="color:#fff">Chat MINSA</b> — minsa.gob.pe/salud-mental
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ════════════ CAPACITACIONES PADRES ════════════ -->
+<div id="s-pad-cap" class="screen">
+<div class="hdr-purple" style="background:linear-gradient(135deg,#1A5276,#2874A6);display:flex;align-items:center;gap:.7rem">
+  <button onclick="go('s-padres')" style="width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:8px;border:none;color:#fff;font-size:.9rem;cursor:pointer;flex-shrink:0">←</button>
+  <div style="flex:1"><div class="hdr-title">Aprende 🎓</div><div class="hdr-sub">Capacítate para acompañar mejor</div></div>
+  <div style="background:rgba(255,255,255,.15);border-radius:10px;padding:.25rem .6rem;font-size:.65rem;font-weight:800;color:#fff">8 videos</div>
+</div>
+<div style="padding:1.2rem 1.1rem 3rem;display:flex;flex-direction:column;gap:1rem">
+
+  <div style="background:linear-gradient(135deg,#D6EAF8,#AED6F1);border-radius:14px;padding:.85rem 1rem;border:1.5px solid #85C1E9">
+    <div style="font-size:.82rem;font-weight:900;color:#1A5276">💡 Los padres informados detectan señales de alerta 3 veces más rápido. Todos estos recursos son gratuitos.</div>
+  </div>
+
+  <!-- Categorías -->
+  <div style="display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.3rem;scrollbar-width:none">
+    <div class="pad-cat-btn active" onclick="filterPadCaps('todo',this)" style="border-color:#2874A6">✨ Todo</div>
+    <div class="pad-cat-btn" onclick="filterPadCaps('comunicacion',this)">💬 Comunicación</div>
+    <div class="pad-cat-btn" onclick="filterPadCaps('senales',this)">🔍 Señales</div>
+    <div class="pad-cat-btn" onclick="filterPadCaps('apoyo',this)">🤝 Apoyo</div>
+    <div class="pad-cat-btn" onclick="filterPadCaps('autocuidado',this)">🧘 Tu bienestar</div>
+  </div>
+
+  <!-- Lista dinámica -->
+  <div id="pad-cap-list" style="display:flex;flex-direction:column;gap:.85rem"></div>
+
+  <!-- Recursos externos -->
+  <div style="font-size:.67rem;font-weight:900;color:var(--gr);letter-spacing:1.5px;margin-top:.3rem">📖 GUÍAS Y RECURSOS</div>
+  <div class="cur-card" onclick="window.open('https://www.minsa.gob.pe/salud-mental','_blank')">
+    <div class="cur-ico" style="background:linear-gradient(135deg,#D1FAE5,#A7F3D0)">🇵🇪</div>
+    <div style="flex:1"><div style="font-size:.84rem;font-weight:900;color:var(--dk)">MINSA — Guía de Salud Mental Familiar</div><div style="font-size:.7rem;color:var(--gr);margin-top:.08rem">Guía oficial para padres · Español · PDF descargable</div></div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--pu)">Ir →</div>
+  </div>
+  <div class="cur-card" onclick="window.open('https://childmind.org/es','_blank')">
+    <div class="cur-ico" style="background:linear-gradient(135deg,#FEF3C7,#FDE68A)">🌐</div>
+    <div style="flex:1"><div style="font-size:.84rem;font-weight:900;color:var(--dk)">Child Mind Institute — Para padres (español)</div><div style="font-size:.7rem;color:var(--gr);margin-top:.08rem">Recursos basados en evidencia · 100% gratuito</div></div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--pu)">Ir →</div>
+  </div>
+  <div class="cur-card" onclick="window.open('https://www.perueduca.pe','_blank')">
+    <div class="cur-ico" style="background:linear-gradient(135deg,#EDE7F6,#D1C4E9)">🇵🇪</div>
+    <div style="flex:1"><div style="font-size:.84rem;font-weight:900;color:var(--dk)">PerúEduca — Familia y convivencia escolar</div><div style="font-size:.7rem;color:var(--gr);margin-top:.08rem">Plataforma oficial MINEDU para padres · Gratis</div></div>
+    <div style="font-size:.75rem;font-weight:800;color:var(--pu)">Ir →</div>
+  </div>
+
+</div>
+</div>
+
+<!-- ════════════ CONSEJOS PADRES ════════════ -->
+<div id="s-pad-consejos" class="screen">
+<div class="hdr-purple" style="background:linear-gradient(135deg,#1A5276,#2874A6);display:flex;align-items:center;gap:.7rem">
+  <button onclick="go('s-padres')" style="width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:8px;border:none;color:#fff;font-size:.9rem;cursor:pointer;flex-shrink:0">←</button>
+  <div><div class="hdr-title">Cómo hablar 💬</div><div class="hdr-sub">Técnicas reales para el diálogo en casa</div></div>
+</div>
+<div style="padding:1.2rem 1.1rem 3rem;display:flex;flex-direction:column;gap:1rem">
+  <div class="consejo-card consejo-si">
+    <div class="consejo-header">✅ LO QUE SÍ FUNCIONA</div>
+    <div class="consejo-item"><span>💬</span><span>Pregunta por su día sin esperar respuesta perfecta: <i>"¿Qué fue lo más complicado hoy?"</i></span></div>
+    <div class="consejo-item"><span>👂</span><span>Escucha sin interrumpir ni dar soluciones. A veces solo quieren ser escuchados.</span></div>
+    <div class="consejo-item"><span>🤝</span><span>Valida sus emociones primero: <i>"Entiendo que eso fue difícil"</i> — antes de corregir.</span></div>
+    <div class="consejo-item"><span>📵</span><span>Apaga tu celular cuando hables con él/ella. Ese gesto dice más que las palabras.</span></div>
+    <div class="consejo-item"><span>🚗</span><span>Los adolescentes hablan mejor en movimiento: en el auto, caminando, cocinando juntos.</span></div>
+  </div>
+  <div class="consejo-card consejo-no">
+    <div class="consejo-header">❌ LO QUE NO FUNCIONA</div>
+    <div class="consejo-item"><span>🚫</span><span><i>"En mis tiempos yo aguantaba"</i> — invalida su experiencia y cierra el diálogo.</span></div>
+    <div class="consejo-item"><span>🚫</span><span>Interrogar: <i>"¿Por qué estás así?"</i> genera defensividad. Mejor: <i>"¿Qué estás sintiendo?"</i></span></div>
+    <div class="consejo-item"><span>🚫</span><span>Minimizar: <i>"Eso no es nada"</i> — hace que no vuelvan a contarte cosas importantes.</span></div>
+    <div class="consejo-item"><span>🚫</span><span>Reaccionar con enojo a lo que te cuentan. Si reaccionas mal la primera vez, no habrá segunda.</span></div>
+  </div>
+  <div style="background:linear-gradient(135deg,var(--puf),#EDE7F6);border-radius:16px;padding:1rem 1.1rem;border:1.5px solid rgba(107,63,160,.15)">
+    <div style="font-size:.85rem;font-weight:900;color:var(--dk);margin-bottom:.4rem">💜 Recuerda esto</div>
+    <div style="font-size:.78rem;color:var(--gr);line-height:1.65">Tu hijo/a no necesita que tengas todas las respuestas. Solo necesita saber que puede contarte sin que el mundo se acabe.</div>
+  </div>
+</div>
+</div>
+
+
+<script src="js/misiones.js"></script>
+<script src="js/aprende.js"></script>
+<script src="js/core.js"></script>
+</body>
+</html>
