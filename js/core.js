@@ -4,7 +4,6 @@ const APIKEY = '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';
 
 // ══ ESTADO ════════════════════════════════════════
 let userData = {};
-let docenteData = {};
 let padreData = {};
 let tamAns = [], tamStep = 0;
 let nivResult = 'verde';
@@ -32,39 +31,6 @@ function esPrimaria(grado){ return grado && grado.includes('Primaria'); }
 function esSecundaria(grado){ return grado && grado.includes('Secundaria'); }
 function getNumGrado(grado){ return parseInt((grado||'').match(/\d/)?.[0]||'1'); }
 
-// ══ LOGIN DOCENTE ══════════════════════════════════
-function checkDocLogin(){
-  const ok = document.getElementById('doc-login-codigo').value.trim() &&
-             document.getElementById('doc-login-grado').value &&
-             document.getElementById('doc-login-seccion').value;
-  document.getElementById('doc-login-btn').disabled = !ok;
-}
-function startDocente(){
-  const saved = localStorage.getItem('uk_docente');
-  if(saved){ docenteData=JSON.parse(saved); updateDocenteUI(); go('s-docente'); return; }
-  go('s-login-docente');
-}
-function completarLoginDocente(){
-  docenteData = {
-    codigo:  document.getElementById('doc-login-codigo').value.trim(),
-    nombre:  document.getElementById('doc-login-nombre').value.trim() || 'Docente',
-    grado:   document.getElementById('doc-login-grado').value,
-    seccion: document.getElementById('doc-login-seccion').value,
-  };
-  localStorage.setItem('uk_docente', JSON.stringify(docenteData));
-  updateDocenteUI();
-  go('s-docente');
-}
-function updateDocenteUI(){
-  const badge = document.getElementById('doc-nombre-badge');
-  if(badge && docenteData.nombre) badge.textContent = `${docenteData.nombre} · ${docenteData.grado||''} ${docenteData.seccion||''}`;
-}
-function cerrarSesionDocente(){
-  if(!confirm('¿Cerrar sesión docente?\nDeberás volver a ingresar tu código.')) return;
-  localStorage.removeItem('uk_docente');
-  docenteData = {};
-  go('s-profiles');
-}
 
 // ══ LOGIN PADRES ═══════════════════════════════════
 function checkPadreLogin(){
@@ -280,29 +246,7 @@ function filtrarVideos(cat, btn, ecId){
 }
 
 // ══ PERSONAJES SVG ═════════════════════════════════
-function charVerde(){return`<svg width="110" height="100" viewBox="0 0 110 100" class="char-bounce">
-  <ellipse cx="55" cy="42" rx="27" ry="23" fill="#9B6DD4"/>
-  <ellipse cx="55" cy="42" rx="23" ry="19" fill="#B08AE0"/>
-  <path d="M36 36 Q43 30 51 36 Q58 42 66 36 Q72 30 78 36" stroke="#7A52B0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-  <path d="M37 46 Q45 40 53 46 Q60 52 68 46 Q73 40 77 46" stroke="#7A52B0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-  <ellipse cx="44" cy="41" rx="5" ry="5.5" fill="#fff"/>
-  <ellipse cx="66" cy="41" rx="5" ry="5.5" fill="#fff"/>
-  <path d="M42 39 Q44 37 46 39" stroke="#2D1B6B" stroke-width="1.5" fill="none"/>
-  <path d="M64 39 Q66 37 68 39" stroke="#2D1B6B" stroke-width="1.5" fill="none"/>
-  <circle cx="45" cy="41" r="2.8" fill="#2D1B6B"/><circle cx="67" cy="41" r="2.8" fill="#2D1B6B"/>
-  <circle cx="46" cy="40" r="1.1" fill="#fff"/><circle cx="68" cy="40" r="1.1" fill="#fff"/>
-  <path d="M46 51 Q55 59 64 51" stroke="#6B3FA0" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <ellipse cx="37" cy="47" rx="4.5" ry="3" fill="rgba(255,100,100,.25)"/>
-  <ellipse cx="73" cy="47" rx="4.5" ry="3" fill="rgba(255,100,100,.25)"/>
-  <ellipse cx="26" cy="50" rx="7" ry="4" fill="#9B6DD4" transform="rotate(-25 26 50)"/>
-  <ellipse cx="84" cy="50" rx="7" ry="4" fill="#9B6DD4" transform="rotate(25 84 50)"/>
-  <ellipse cx="46" cy="68" rx="6" ry="8" fill="#8B5FC0"/>
-  <ellipse cx="64" cy="68" rx="6" ry="8" fill="#8B5FC0"/>
-  <ellipse cx="45" cy="77" rx="8" ry="4" fill="#D4A017"/>
-  <ellipse cx="65" cy="77" rx="8" ry="4" fill="#D4A017"/>
-  <text x="62" y="22" font-size="18" fill="#10B981">✓</text>
-  <text x="30" y="20" font-size="14" fill="#F0C840">⭐</text>
-</svg>`;}
+function charVerde(){return` <img src="imagenes/animacion1.png" alt="UmaKay" style="width:90px;height:90px;object-fit:contain;border-radius:50%;margin:0 auto .6rem;display:block;filter:drop-shadow(0 4px 12px rgba(107,63,160,.3))"/>`;}
 
 function charAmarillo(){return`<svg width="110" height="100" viewBox="0 0 110 100" class="char-bounce">
   <ellipse cx="55" cy="42" rx="27" ry="23" fill="#9B6DD4"/>
@@ -363,7 +307,6 @@ function go(id){
   }
   if(id==='s-misiones'){ renderMisiones(); }
   if(id==='s-home'){ renderHomePreview(); }
-  if(id==='s-doc-cap'){ setTimeout(initDocCaps,30); }
   if(id==='s-pad-cap'){ setTimeout(initPadCaps,30); }
 }
 function comingSoon(){ alert('🚧 Próximamente\nEsta sección estará disponible pronto.'); }
@@ -830,7 +773,7 @@ function initChat(){
   chatHist=[];
   document.getElementById('cmsgs').innerHTML='';
   const nom=userData.nombre?`, ${userData.nombre}`:'';
-  setTimeout(()=>addBot(`Hola${nom} 👋 Soy el asistente de UmaKay.\n\nEste espacio es completamente anónimo — nadie más puede leer esto.\n\n¿Cómo te has sentido esta semana? 🌿`,[
+  setTimeout(()=>addBot(`Hola${nom} 👋 Soy UmaKay.\n\nEste espacio es completamente anónimo — nadie más puede leer esto.\n\n¿Cómo te has sentido esta semana? 🌿`,[
     {e:'😄',t:'Bien, me siento tranquilo/a'},
     {e:'😐',t:'Más o menos, con altibajos'},
     {e:'😔',t:'No muy bien, con tristeza'},
@@ -891,14 +834,6 @@ function stopBreath(){clearInterval(bInt);document.getElementById('bov').style.d
 
 // ══ INIT ══════════════════════════════════════════
 updateTips();
-// Fecha badge docente
-const fd=document.getElementById('doc-fecha-badge');
-if(fd){const d=new Date();fd.textContent=d.toLocaleDateString('es-PE',{weekday:'short',day:'numeric',month:'short'});}
-// Restaurar sesiones guardadas (docente/padres)
-const _sd=localStorage.getItem('uk_docente');
-if(_sd){ docenteData=JSON.parse(_sd); updateDocenteUI(); }
-const _sp=localStorage.getItem('uk_padre');
 if(_sp){ padreData=JSON.parse(_sp); updatePadreUI(); }
 // Inicializar preview de misiones en home al cargar
 setTimeout(()=>{ try{ renderHomePreview(); }catch(e){} }, 400);
-

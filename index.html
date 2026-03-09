@@ -38,10 +38,31 @@ body{font-family:'Nunito',sans-serif;background:var(--ow);min-height:100vh;displ
 .mascota-img{width:160px;height:160px;object-fit:contain;filter:drop-shadow(0 8px 24px rgba(107,63,160,.35));border-radius:50%;}
 
 /* ══ SPLASH ══ */
-#s-splash{background:linear-gradient(145deg,var(--pud),var(--pu) 55%,#9B6DD4);align-items:center;justify-content:center;overflow:hidden;position:relative;}
+
+
+#s-splash{background:linear-gradient(145deg,var(--pud),var(--pu) 55%,#8db7c9);
+align-items:center;justify-content:center;overflow:hidden;position:relative;}
 #s-splash::before{content:'';position:absolute;width:320px;height:320px;background:radial-gradient(circle,rgba(212,160,23,.2),transparent 70%);top:-70px;right:-70px;border-radius:50%;}
 .sp-in{text-align:center;z-index:1;padding:2rem;}
-.sp-logo{width:90px;height:90px;background:rgba(255,255,255,.15);border-radius:26px;margin:0 auto 1.2rem;display:flex;align-items:center;justify-content:center;animation:fl 3s ease-in-out infinite;backdrop-filter:blur(10px);border:2px solid rgba(255,255,255,.22);}
+
+
+.sp-logo{width:90px;height:90px;
+background:rgba(255,255,255,.15);
+border-radius:26px;
+margin:0 auto 1.2rem;
+display:flex;
+align-items:center;
+justify-content:center;
+animation:fl 3s ease-in-out
+infinite;
+backdrop-filter:blur(10px);
+border:2px solid rgba(255,255,255,.22);}
+
+
+
+
+
+
 .sp-name{font-family:'Fraunces',serif;font-size:3.2rem;font-weight:900;color:#fff;letter-spacing:-1px;line-height:1;}
 .sp-tag{font-size:.82rem;color:rgba(255,255,255,.7);font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin:.35rem 0 .25rem;}
 .sp-q{font-size:.8rem;color:var(--gol);font-style:italic;margin-bottom:2.2rem;}
@@ -146,7 +167,7 @@ body{font-family:'Nunito',sans-serif;background:var(--ow);min-height:100vh;displ
 #s-home{background:var(--ow);}
 .topb{background:linear-gradient(135deg,var(--pud),var(--pu));padding:1rem 1.3rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
 .tbl{display:flex;align-items:center;gap:.55rem;}
-.tb-logo{width:32px;height:32px;border-radius:9px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.tb-logo{width:70px;height:70px;border-radius:9px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
 .tb-logo img{width:100%;height:100%;object-fit:contain;}
 .tb-nm{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:900;color:#fff;}
 .tb-btn{width:32px;height:32px;background:rgba(255,255,255,.14);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.88rem;cursor:pointer;border:none;color:#fff;}
@@ -277,7 +298,7 @@ body{font-family:'Nunito',sans-serif;background:var(--ow);min-height:100vh;displ
 .vid-visto{background:#D1FAE5;color:#065F46;border-radius:7px;padding:.18rem .48rem;font-size:.65rem;font-weight:800;}
 .vid-nuevo{background:linear-gradient(135deg,#EF4444,#F87171);color:#fff;border-radius:7px;padding:.18rem .48rem;font-size:.62rem;font-weight:900;}
 
-/* ══ SEMÁFORO / ALERTAS / DOCENTE / PADRES ══ */
+/* ══ SEMÁFORO / ALERTAS / PADRES ══ */
 .semaf-card{background:#fff;border-radius:16px;padding:.9rem .6rem;display:flex;flex-direction:column;align-items:center;gap:.35rem;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.07);}
 .alerta-card{background:#fff;border-radius:16px;padding:.9rem 1rem;display:flex;align-items:flex-start;gap:.75rem;box-shadow:0 3px 10px rgba(0,0,0,.07);}
 .alerta-naranja{border-left:4px solid #F59E0B;}
@@ -448,12 +469,12 @@ body{font-family:'Nunito',sans-serif;background:var(--ow);min-height:100vh;displ
 
 <!-- MASCOTA UmaKay — imagen real -->
 <div class="mascota-wrap">
-  <img src="imagenes/animacion1.png" alt="Mascota UmaKay" class="mascota-img char-bounce"/>
+  <img src="imagenes/isotipo-03.png" alt="Mascota UmaKay" class="mascota-img char-bounce"/>
 </div>
 
-<div class="sp-name">UmaKay</div>
-<div class="sp-tag">Tu mente importa</div>
-<div class="sp-q">Uma = cabeza · Kay = estar bien · Quechua</div>
+<div class="sp-name">MINDRA</div>
+<div class="sp-tag">Mente en equilibrio</div>
+<div class="sp-q">Mind = mente · ra = transmitir armonía</div>
 <button class="sp-btn" onclick="go('s-profiles')">Empezar ✨</button>
 </div>
 </div>
@@ -462,7 +483,7 @@ body{font-family:'Nunito',sans-serif;background:var(--ow);min-height:100vh;displ
 <div id="s-profiles" class="screen">
 <div class="ph" style="padding-bottom:1.8rem">
   <img src="imagenes/animacion1.png" alt="UmaKay" style="width:90px;height:90px;object-fit:contain;border-radius:50%;margin:0 auto .6rem;display:block;filter:drop-shadow(0 4px 12px rgba(107,63,160,.3))"/>
-  <h1>¡Hola! Soy UmaKay 👋</h1>
+  <h1>¡Hola! Soy MINDRA 👋</h1>
   <p>¿Quién eres hoy?</p>
 </div>
 <div class="pb">
@@ -471,64 +492,12 @@ body{font-family:'Nunito',sans-serif;background:var(--ow);min-height:100vh;displ
     <div class="pci"><h3>Soy estudiante</h3><p>Tu espacio seguro para cuidar tu bienestar</p></div>
     <div class="par">›</div>
   </div>
-  <div class="pc" onclick="startDocente()">
-    <div class="pi pi-t">📚</div>
-    <div class="pci"><h3>Soy docente</h3><p>Panel de bienestar del aula y alertas</p></div>
-    <div class="par">›</div>
-  </div>
   <div class="pc" onclick="startPadre()">
     <div class="pi pi-p">🏠</div>
     <div class="pci"><h3>Soy padre o madre</h3><p>Acompaña a tu hijo con orientación</p></div>
     <div class="par">›</div>
   </div>
   <div style="text-align:center;font-size:.75rem;color:var(--gr);padding:.3rem;font-weight:600">🔒 Todos los datos son anónimos y seguros</div>
-</div>
-</div>
-
-<!-- ════════════ LOGIN DOCENTE ════════════ -->
-<div id="s-login-docente" class="screen">
-<div class="hdr-purple" style="text-align:center;padding:2rem 1.2rem 2.5rem">
-  <img src="imagenes/animacion1.png" alt="UmaKay" style="width:80px;height:80px;object-fit:contain;border-radius:50%;margin:0 auto .7rem;display:block;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))"/>
-  <div class="hdr-title">Acceso Docente 📚</div>
-  <div class="hdr-sub">Ingresa tu código de docente</div>
-</div>
-<div style="padding:1.5rem 1.3rem;display:flex;flex-direction:column;gap:1.2rem;max-width:400px;margin:0 auto;width:100%">
-  <div class="form-g">
-    <label class="form-lbl">Código de docente</label>
-    <input class="form-inp" id="doc-login-codigo" type="text" placeholder="Ej: DOC-2025-0042" oninput="checkDocLogin()">
-    <span class="form-hint">📋 Asignado por la dirección del colegio</span>
-  </div>
-  <div class="form-g">
-    <label class="form-lbl">Tu nombre (opcional)</label>
-    <input class="form-inp" id="doc-login-nombre" type="text" placeholder="Prof. García">
-  </div>
-  <div class="form-g">
-    <label class="form-lbl">Grado y sección a cargo</label>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.7rem">
-      <select class="sel-inp" id="doc-login-grado" onchange="checkDocLogin()">
-        <option value="">Grado</option>
-        <optgroup label="Primaria">
-          <option value="1P">1° Primaria</option><option value="2P">2° Primaria</option>
-          <option value="3P">3° Primaria</option><option value="4P">4° Primaria</option>
-          <option value="5P">5° Primaria</option><option value="6P">6° Primaria</option>
-        </optgroup>
-        <optgroup label="Secundaria">
-          <option value="1S">1° Secundaria</option><option value="2S">2° Secundaria</option>
-          <option value="3S">3° Secundaria</option><option value="4S">4° Secundaria</option>
-          <option value="5S">5° Secundaria</option>
-        </optgroup>
-      </select>
-      <select class="sel-inp" id="doc-login-seccion" onchange="checkDocLogin()">
-        <option value="">Sección</option>
-        <option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option>
-      </select>
-    </div>
-  </div>
-  <div style="background:var(--puf);border-radius:12px;padding:.75rem 1rem;font-size:.75rem;color:var(--pu);font-weight:700">
-    🔒 Tu código solo se guarda en este dispositivo. No compartimos tu información.
-  </div>
-  <button class="btn-pu" id="doc-login-btn" disabled onclick="completarLoginDocente()">Ingresar al panel →</button>
-  <button onclick="go('s-profiles')" style="background:none;border:none;color:var(--gr);font-size:.82rem;font-weight:700;cursor:pointer;padding:.5rem">← Volver</button>
 </div>
 </div>
 
@@ -567,44 +536,13 @@ body{font-family:'Nunito',sans-serif;background:var(--ow);min-height:100vh;displ
 
   <!-- PERSONAJE bienvenida registro -->
   <div class="char-wrap">
-  <svg width="130" height="120" viewBox="0 0 130 120" class="char-bounce char-wave">
-    <!-- Cuerpo -->
-    <ellipse cx="65" cy="48" rx="28" ry="24" fill="#9B6DD4"/>
-    <ellipse cx="65" cy="48" rx="24" ry="20" fill="#B08AE0"/>
-    <!-- Pliegues -->
-    <path d="M45 42 Q52 36 60 42 Q67 48 75 42 Q81 36 86 42" stroke="#7A52B0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-    <path d="M46 52 Q54 46 62 52 Q69 58 77 52 Q82 46 86 52" stroke="#7A52B0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-    <!-- Ojos felices -->
-    <ellipse cx="54" cy="47" rx="5" ry="5.5" fill="#fff"/>
-    <ellipse cx="76" cy="47" rx="5" ry="5.5" fill="#fff"/>
-    <circle cx="55" cy="48" r="3" fill="#2D1B6B"/>
-    <circle cx="77" cy="48" r="3" fill="#2D1B6B"/>
-    <circle cx="56" cy="46.5" r="1.2" fill="#fff"/>
-    <circle cx="78" cy="46.5" r="1.2" fill="#fff"/>
-    <!-- Sonrisa grande -->
-    <path d="M57 57 Q65 64 73 57" stroke="#6B3FA0" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-    <!-- Mejillas -->
-    <ellipse cx="47" cy="54" rx="5" ry="3" fill="rgba(255,100,100,.2)"/>
-    <ellipse cx="83" cy="54" rx="5" ry="3" fill="rgba(255,100,100,.2)"/>
-    <!-- Bracito saludando -->
-    <ellipse cx="34" cy="58" rx="7" ry="4.5" fill="#9B6DD4" transform="rotate(-35 34 58)"/>
-    <ellipse cx="96" cy="52" rx="7" ry="4.5" fill="#9B6DD4" transform="rotate(30 96 52)" class="arm-r"/>
-    <!-- Piernas -->
-    <ellipse cx="55" cy="74" rx="7" ry="9" fill="#8B5FC0"/>
-    <ellipse cx="75" cy="74" rx="7" ry="9" fill="#8B5FC0"/>
-    <ellipse cx="54" cy="84" rx="9" ry="4.5" fill="#D4A017"/>
-    <ellipse cx="76" cy="84" rx="9" ry="4.5" fill="#D4A017"/>
-    <!-- Clipboard -->
-    <rect x="88" y="30" width="24" height="30" rx="3" fill="#fff" stroke="#D4A017" stroke-width="1.5"/>
-    <rect x="94" y="26" width="12" height="7" rx="2" fill="#D4A017"/>
-    <line x1="92" y1="40" x2="108" y2="40" stroke="#E5E7EB" stroke-width="1.5"/>
-    <line x1="92" y1="45" x2="108" y2="45" stroke="#E5E7EB" stroke-width="1.5"/>
-    <line x1="92" y1="50" x2="104" y2="50" stroke="#E5E7EB" stroke-width="1.5"/>
-  </svg>
+  <div class="mascota-wrap">
+  <img src="imagenes/animacion1.png" alt="Mascota UmaKay" class="mascota-img char-bounce"/>
+</div>
   </div>
 
   <div style="text-align:center">
-    <h2 style="font-size:1.25rem;font-weight:900;color:var(--dk);margin-bottom:.4rem">¡Bienvenido/a a UmaKay! 💜</h2>
+    <h2 style="font-size:1.25rem;font-weight:900;color:var(--dk);margin-bottom:.4rem">¡Bienvenido/a a Mindra! 💜</h2>
     <p style="font-size:.83rem;color:var(--gr);line-height:1.55">Ingresa el código que te dio tu colegio. Es solo para verificar que eres estudiante — tu nombre nadie lo ve.</p>
   </div>
 
@@ -682,7 +620,8 @@ body{font-family:'Nunito',sans-serif;background:var(--ow);min-height:100vh;displ
 
   <!-- PERSONAJE resultado — cambia por JS -->
   <div class="char-wrap" id="res-char-wrap" style="margin-bottom:.3rem"></div>
-
+		
+		
   <div class="rc-tag" id="rc-tag">🎓 Cargando...</div>
   <div class="rc-niv" id="rc-niv">Analizando...</div>
   <div class="rc-title" id="rc-title">Un momento...</div>
@@ -700,6 +639,7 @@ body{font-family:'Nunito',sans-serif;background:var(--ow);min-height:100vh;displ
   </div>
 
   <button class="btn-pu" onclick="irABienvenida()" style="margin-top:.5rem">Ver qué sigue →</button>
+  
 </div>
 </div>
 
@@ -718,8 +658,9 @@ body{font-family:'Nunito',sans-serif;background:var(--ow);min-height:100vh;displ
 <div id="s-home" class="screen">
 <div class="topb">
   <div class="tbl">
-    <div class="tb-logo"><img src="imagenes/logo_umakay.png" alt="UmaKay"></div>
-    <div class="tb-nm">UmaKay</div>
+   
+    <div class="tb-nm">MINDRA | UMAKAY</div>
+	<div class="tb-logo"><img src="imagenes/animacion1.png" alt="UmaKay"></div>
   </div>
   <div style="display:flex;gap:.38rem;align-items:center">
     <div id="home-grado-badge" style="font-size:.62rem;font-weight:800;color:var(--pu);background:var(--puf);border-radius:10px;padding:.2rem .55rem;display:none"></div>
@@ -830,9 +771,9 @@ body{font-family:'Nunito',sans-serif;background:var(--ow);min-height:100vh;displ
 <div id="s-chat" class="screen">
 <div class="chdr">
   <button class="cbk" onclick="go('s-home')">←</button>
-  <div class="cav">🤖</div>
+  <img src="imagenes/animacion1.png" alt="UmaKay" style="width:90px;height:90px;object-fit:contain;border-radius:50%;margin:0 auto .6rem;display:block;filter:drop-shadow(0 4px 12px rgba(107,63,160,.3))"/>
   <div class="cbi">
-    <div class="cbn">Asistente UmaKay · IA</div>
+    <div class="cbn">Asistente UmaKay </div>
     <div class="cbs"><div class="sdot"></div>Siempre disponible</div>
   </div>
   <span style="color:rgba(255,255,255,.5);font-size:.8rem">🔒</span>
@@ -1016,203 +957,6 @@ body{font-family:'Nunito',sans-serif;background:var(--ow);min-height:100vh;displ
 <div class="bact" id="bact">Inhala lentamente...</div>
 <div class="bnum" id="bnum">4</div>
 <button class="bcls" onclick="stopBreath()">Cerrar ✕</button>
-</div>
-
-<!-- ════════════ HOME DOCENTE ════════════ -->
-<div id="s-docente" class="screen">
-<div class="hdr-purple" style="display:flex;align-items:center;justify-content:space-between;gap:.7rem">
-  <div style="display:flex;align-items:center;gap:.7rem;flex:1">
-    <div>
-      <div class="hdr-title">Docente 📚</div>
-      <div class="hdr-sub" id="doc-nombre-badge">Panel de bienestar del aula</div>
-    </div>
-  </div>
-  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.4rem">
-    <div style="background:rgba(212,160,23,.2);border-radius:20px;padding:.3rem .75rem;font-size:.72rem;font-weight:900;color:#F0C840" id="doc-fecha-badge">Cargando…</div>
-    <button class="logout-btn" onclick="cerrarSesionDocente()">↩ Cerrar sesión</button>
-  </div>
-</div>
-<div style="padding:1.2rem 1.1rem 6rem;display:flex;flex-direction:column;gap:1.2rem">
-
-  <div style="background:linear-gradient(135deg,#4A2575,#6B3FA0);border-radius:18px;padding:1.1rem 1.2rem;color:#fff">
-    <div style="font-size:.7rem;font-weight:700;opacity:.65;margin-bottom:.2rem;text-transform:uppercase;letter-spacing:1px">Bienvenido/a</div>
-    <div style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900">Prof. Docente · UmaKay</div>
-    <div style="font-size:.76rem;opacity:.7;margin-top:.15rem">Tu aula tiene alertas activas hoy 👇</div>
-  </div>
-
-  <!-- SEMÁFORO DEL AULA -->
-  <div style="font-size:.67rem;font-weight:900;color:var(--gr);letter-spacing:1.5px">🚦 SEMÁFORO DEL AULA — 3°B</div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem">
-    <div class="semaf-card" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border:2px solid #10B981">
-      <div style="font-size:1.6rem">🟢</div>
-      <div style="font-size:1.55rem;font-weight:900;color:#065F46">18</div>
-      <div style="font-size:.6rem;font-weight:800;color:#065F46;text-align:center">Bienestar<br>estable</div>
-    </div>
-    <div class="semaf-card" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border:2px solid #F59E0B">
-      <div style="font-size:1.6rem">🟡</div>
-      <div style="font-size:1.55rem;font-weight:900;color:#92400E">7</div>
-      <div style="font-size:.6rem;font-weight:800;color:#92400E;text-align:center">Señales<br>de alerta</div>
-    </div>
-    <div class="semaf-card" style="background:linear-gradient(135deg,#FFF5F5,#FEE2E2);border:2px solid #EF4444">
-      <div style="font-size:1.6rem">🔴</div>
-      <div style="font-size:1.55rem;font-weight:900;color:#991B1B">2</div>
-      <div style="font-size:.6rem;font-weight:800;color:#991B1B;text-align:center">Atención<br>prioritaria</div>
-    </div>
-  </div>
-
-  <!-- ALERTAS -->
-  <div style="font-size:.67rem;font-weight:900;color:var(--gr);letter-spacing:1.5px">🔔 ALERTAS ACTIVAS</div>
-  <div class="alerta-card alerta-naranja">
-    <div class="alerta-ico">🟠</div>
-    <div style="flex:1">
-      <div style="font-size:.84rem;font-weight:900;color:#78350F">Alumno/a · 3°B</div>
-      <div style="font-size:.72rem;color:#92400E;margin-top:.1rem">Indicadores de violencia en el hogar — requiere conversación privada</div>
-      <div style="font-size:.65rem;color:#B45309;margin-top:.22rem;font-weight:700">⚡ Hace 2 horas · Protocolo SÍSEVE recomendado</div>
-    </div>
-    <button onclick="go('s-doc-protocolo')" style="background:#F59E0B;color:#fff;border:none;border-radius:10px;padding:.4rem .65rem;font-size:.65rem;font-weight:800;cursor:pointer;flex-shrink:0;line-height:1.4">Ver<br>protocolo</button>
-  </div>
-  <div class="alerta-card alerta-roja">
-    <div class="alerta-ico">🔴</div>
-    <div style="flex:1">
-      <div style="font-size:.84rem;font-weight:900;color:#7F1D1D">Alumno/a · 3°B</div>
-      <div style="font-size:.72rem;color:#991B1B;margin-top:.1rem">Nivel rojo en tamizaje — atención prioritaria de salud mental</div>
-      <div style="font-size:.65rem;color:#B91C1C;margin-top:.22rem;font-weight:700">⚡ Ayer · Derivar a posta de salud</div>
-    </div>
-    <button onclick="go('s-cita')" style="background:#EF4444;color:#fff;border:none;border-radius:10px;padding:.4rem .65rem;font-size:.65rem;font-weight:800;cursor:pointer;flex-shrink:0;line-height:1.4">Gestionar<br>cita</button>
-  </div>
-
-  <!-- ACCIONES -->
-  <div style="font-size:.67rem;font-weight:900;color:var(--gr);letter-spacing:1.5px">⚡ ACCIONES RÁPIDAS</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.7rem">
-    <button class="doc-action-btn" onclick="go('s-doc-protocolo')"><span style="font-size:1.35rem">📋</span><span style="font-size:.76rem;font-weight:800">Protocolo de<br>actuación</span></button>
-    <button class="doc-action-btn" onclick="go('s-doc-cap')"><span style="font-size:1.35rem">🎓</span><span style="font-size:.76rem;font-weight:800">Capacitaciones<br>docentes</span></button>
-    <button class="doc-action-btn" onclick="alert('🔗 En producción:\nsiseve.minedu.gob.pe\n\nRegistra el caso directamente\nen el sistema nacional.')"><span style="font-size:1.35rem">🛡️</span><span style="font-size:.76rem;font-weight:800">Ir a<br>SÍSEVE</span></button>
-    <button class="doc-action-btn" onclick="alert('📊 Reporte del aula generado\n\nEn producción: PDF con datos\nagregados y anónimos del aula.')"><span style="font-size:1.35rem">📊</span><span style="font-size:.76rem;font-weight:800">Generar<br>reporte</span></button>
-  </div>
-
-  <!-- TENDENCIA -->
-  <div style="background:#fff;border-radius:18px;padding:1.1rem 1.1rem .9rem;box-shadow:0 3px 12px rgba(107,63,160,.09)">
-    <div style="font-size:.82rem;font-weight:900;color:var(--dk);margin-bottom:.8rem">📈 Tendencia esta semana</div>
-    <div style="display:flex;align-items:flex-end;gap:.35rem;height:56px;margin-bottom:.45rem">
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem"><div style="background:var(--pu);border-radius:4px 4px 0 0;width:100%;height:32px"></div><div style="font-size:.58rem;color:var(--gr);font-weight:700">Lun</div></div>
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem"><div style="background:var(--pu);border-radius:4px 4px 0 0;width:100%;height:24px"></div><div style="font-size:.58rem;color:var(--gr);font-weight:700">Mar</div></div>
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem"><div style="background:var(--gol);border-radius:4px 4px 0 0;width:100%;height:42px"></div><div style="font-size:.58rem;color:var(--gr);font-weight:700">Mié</div></div>
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem"><div style="background:var(--pu);border-radius:4px 4px 0 0;width:100%;height:18px"></div><div style="font-size:.58rem;color:var(--gr);font-weight:700">Jue</div></div>
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem"><div style="background:var(--pul);border-radius:4px 4px 0 0;width:100%;height:36px"></div><div style="font-size:.58rem;color:var(--gr);font-weight:700">Vie</div></div>
-    </div>
-    <div style="font-size:.69rem;color:var(--gr)">📌 Check-ins completados por día · esta semana</div>
-  </div>
-
-  <!-- LÍNEAS DE APOYO -->
-  <div style="background:linear-gradient(135deg,#1A0A2E,#2D0F5E);border-radius:16px;padding:1rem 1.1rem">
-    <div style="font-size:.8rem;font-weight:900;color:#fff;margin-bottom:.55rem">📞 Líneas de apoyo — docentes</div>
-    <div style="font-size:.73rem;color:rgba(255,255,255,.75);line-height:1.8">
-      🆘 <b style="color:#fff">Línea 113 opción 5</b> — Salud mental, 24h gratuita<br>
-      👨‍👩‍👧 <b style="color:#fff">DEMUNA 0800-22-833</b> — Maltrato infantil, gratis<br>
-      🛡️ <b style="color:#fff">CEM 100</b> — Centro Emergencia Mujer, 24h<br>
-      📋 <b style="color:#fff">SÍSEVE</b> — siseve.minedu.gob.pe
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- ════════════ CAPACITACIONES DOCENTE ════════════ -->
-<div id="s-doc-cap" class="screen">
-<div class="hdr-purple" style="display:flex;align-items:center;gap:.7rem">
-  <button onclick="go('s-docente')" style="width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:8px;border:none;color:#fff;font-size:.9rem;cursor:pointer;flex-shrink:0">←</button>
-  <div style="flex:1"><div class="hdr-title">Capacitaciones 🎓</div><div class="hdr-sub">Formación en salud mental escolar</div></div>
-  <div style="background:rgba(255,255,255,.15);border-radius:10px;padding:.25rem .6rem;font-size:.65rem;font-weight:800;color:#fff">8 videos</div>
-</div>
-<div style="padding:1.2rem 1.1rem 3rem;display:flex;flex-direction:column;gap:1rem">
-
-  <div style="background:linear-gradient(135deg,var(--puf),#EDE7F6);border-radius:14px;padding:.85rem 1rem;border:1.5px solid rgba(107,63,160,.18)">
-    <div style="font-size:.82rem;font-weight:900;color:var(--dk)">📌 Todos los recursos son gratuitos — emitidos por MINSA, MINEDU, UNICEF u OMS.</div>
-  </div>
-
-  <!-- Categorías -->
-  <div style="display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.3rem;scrollbar-width:none">
-    <div class="doc-cat-btn active" onclick="filterDocCaps('todo',this)">✨ Todo</div>
-    <div class="doc-cat-btn" onclick="filterDocCaps('deteccion',this)">🔍 Detección</div>
-    <div class="doc-cat-btn" onclick="filterDocCaps('intervencion',this)">🤝 Intervención</div>
-    <div class="doc-cat-btn" onclick="filterDocCaps('autocuidado',this)">🧘 Autocuidado</div>
-    <div class="doc-cat-btn" onclick="filterDocCaps('familia',this)">👨‍👩‍👧 Familia</div>
-  </div>
-
-  <!-- Lista dinámica -->
-  <div id="doc-cap-list" style="display:flex;flex-direction:column;gap:.85rem"></div>
-
-  <!-- Recursos externos -->
-  <div style="font-size:.67rem;font-weight:900;color:var(--gr);letter-spacing:1.5px;margin-top:.3rem">📖 CURSOS Y GUÍAS ONLINE</div>
-  <div class="cur-card" onclick="window.open('https://www.perueduca.pe','_blank')">
-    <div class="cur-ico" style="background:linear-gradient(135deg,#EDE7F6,#D1C4E9)">🇵🇪</div>
-    <div style="flex:1"><div style="font-size:.84rem;font-weight:900;color:var(--dk)">PerúEduca — Salud Mental Docente</div><div style="font-size:.7rem;color:var(--gr);margin-top:.08rem">Plataforma oficial MINEDU · Certificado gratuito · 20h</div></div>
-    <div style="font-size:.75rem;font-weight:800;color:var(--pu)">Ir →</div>
-  </div>
-  <div class="cur-card" onclick="window.open('https://www.coursera.org/learn/science-of-well-being','_blank')">
-    <div class="cur-ico" style="background:linear-gradient(135deg,#DBEAFE,#BFDBFE)">🌐</div>
-    <div style="flex:1"><div style="font-size:.84rem;font-weight:900;color:var(--dk)">Yale — The Science of Well-Being (Coursera)</div><div style="font-size:.7rem;color:var(--gr);margin-top:.08rem">Certificado gratuito · Subtítulos español · 19h</div></div>
-    <div style="font-size:.75rem;font-weight:800;color:var(--pu)">Ir →</div>
-  </div>
-  <div class="cur-card" onclick="window.open('https://www.who.int/es/tools/mhGAP','_blank')">
-    <div class="cur-ico" style="background:linear-gradient(135deg,#D1FAE5,#A7F3D0)">🏥</div>
-    <div style="flex:1"><div style="font-size:.84rem;font-weight:900;color:var(--dk)">OMS — Guía mhGAP para entornos educativos</div><div style="font-size:.7rem;color:var(--gr);margin-top:.08rem">Intervención en salud mental · Español · PDF gratis</div></div>
-    <div style="font-size:.75rem;font-weight:800;color:var(--pu)">Ir →</div>
-  </div>
-
-</div>
-</div>
-
-<!-- ════════════ PROTOCOLO DOCENTE ════════════ -->
-<div id="s-doc-protocolo" class="screen">
-<div class="hdr-purple" style="display:flex;align-items:center;gap:.7rem">
-  <button onclick="go('s-docente')" style="width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:8px;border:none;color:#fff;font-size:.9rem;cursor:pointer;flex-shrink:0">←</button>
-  <div><div class="hdr-title">Protocolo 📋</div><div class="hdr-sub">Pasos de actuación por nivel de alerta</div></div>
-</div>
-<div style="padding:1.2rem 1.1rem 3rem;display:flex;flex-direction:column;gap:1rem">
-
-  <div class="proto-card" style="border-left:4px solid #EF4444">
-    <div class="proto-header" style="color:#991B1B">🔴 ALERTA ROJA — Salud mental prioritaria</div>
-    <div class="proto-step"><span class="proto-num" style="background:#EF4444">1</span><span>Contacta al alumno/a en privado ese mismo día</span></div>
-    <div class="proto-step"><span class="proto-num" style="background:#EF4444">2</span><span>Informa al orientador/psicólogo del colegio</span></div>
-    <div class="proto-step"><span class="proto-num" style="background:#EF4444">3</span><span>Notifica a los padres (solo si no hay riesgo de abuso familiar)</span></div>
-    <div class="proto-step"><span class="proto-num" style="background:#EF4444">4</span><span>Deriva a la posta de salud más cercana con carta de referencia</span></div>
-    <div style="background:#FEE2E2;border-radius:10px;padding:.55rem .8rem;font-size:.71rem;color:#991B1B;font-weight:700;margin-top:.2rem">📞 Línea 113 opción 5 si hay riesgo inmediato</div>
-  </div>
-
-  <div class="proto-card" style="border-left:4px solid #F59E0B">
-    <div class="proto-header" style="color:#92400E">🟠 ALERTA NARANJA — Indicadores de maltrato</div>
-    <div class="proto-step"><span class="proto-num" style="background:#F59E0B">1</span><span>Conversa en privado con el alumno/a — con calma, sin presión</span></div>
-    <div class="proto-step"><span class="proto-num" style="background:#F59E0B">2</span><span><b>NO notifiques a los padres</b> si el agresor puede ser familiar</span></div>
-    <div class="proto-step"><span class="proto-num" style="background:#F59E0B">3</span><span>Contacta a la DEMUNA: 0800-22-833 (gratuita, 24h)</span></div>
-    <div class="proto-step"><span class="proto-num" style="background:#F59E0B">4</span><span>Registra el caso en SÍSEVE: siseve.minedu.gob.pe</span></div>
-    <div style="background:#FEF3C7;border-radius:10px;padding:.55rem .8rem;font-size:.71rem;color:#92400E;font-weight:700;margin-top:.2rem">🛡️ CEM 100 si hay violencia activa en el hogar</div>
-  </div>
-
-  <div class="proto-card" style="border-left:4px solid #F59E0B">
-    <div class="proto-header" style="color:#92400E">🟡 ALERTA AMARILLA — Señales emocionales</div>
-    <div class="proto-step"><span class="proto-num" style="background:#F59E0B">1</span><span>Presta atención especial durante la semana en clase</span></div>
-    <div class="proto-step"><span class="proto-num" style="background:#F59E0B">2</span><span>Genera un momento de conversación casual, sin forzar</span></div>
-    <div class="proto-step"><span class="proto-num" style="background:#F59E0B">3</span><span>Si persiste más de 1 semana, informa al orientador</span></div>
-  </div>
-
-  <div class="proto-card" style="border-left:4px solid var(--pu)">
-    <div class="proto-header" style="color:var(--pud)">💜 ALERTA BROMA REITERADA</div>
-    <div class="proto-step"><span class="proto-num" style="background:var(--pu)">1</span><span>El sistema detectó uso inapropiado repetido de la app</span></div>
-    <div class="proto-step"><span class="proto-num" style="background:var(--pu)">2</span><span>Convoca al alumno/a y explica el valor del recurso</span></div>
-    <div class="proto-step"><span class="proto-num" style="background:var(--pu)">3</span><span>Recuerda: detrás de una broma puede haber algo real</span></div>
-  </div>
-
-  <div style="background:linear-gradient(135deg,#1A0A2E,#2D0F5E);border-radius:16px;padding:1rem 1.1rem">
-    <div style="font-size:.8rem;font-weight:900;color:#fff;margin-bottom:.55rem">📋 Marco legal de referencia</div>
-    <div style="font-size:.72rem;color:rgba(255,255,255,.75);line-height:1.8">
-      📜 <b style="color:#fff">Ley 29719</b> — Ley antibullying escolar<br>
-      📜 <b style="color:#fff">DS 010-2012-ED</b> — Reglamento convivencia escolar<br>
-      📜 <b style="color:#fff">RVM 212-2020</b> — Orientaciones para salud mental escolar<br>
-      🌐 <span style="text-decoration:underline;cursor:pointer;color:var(--gol)" onclick="window.open('https://siseve.minedu.gob.pe','_blank')">siseve.minedu.gob.pe</span>
-    </div>
-  </div>
-
-</div>
 </div>
 
 <!-- ════════════ HOME PADRES ════════════ -->
